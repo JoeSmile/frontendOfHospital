@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="description" content="stock vote on gfapp">
+        <meta name="viewport" content="width=device-width, maximum-scale=1, minimum-scale=1, initial-scale=1, user-scalable=no">
+        <meta name="format-detection" content="telephone=no">
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="x5-orientation" content="portrait">
+        <meta name="full-screen" content="yes">
+        <meta name="x5-fullscreen" content="true">
+        <title>Hosiptal</title>
+    </head>
+    <script>
+        document.addEventListener('touchmove', function (e) { // touchmove和touchend部分用于解决调出手机键盘后，点击其他区域，隐藏键盘
+            window.noBlurFromInput = true;
+        }); 
+        document.addEventListener('touchend', function (e) {
+            if (window.noBlurFromInput) {
+                window.noBlurFromInput = false;
+                return;
+            }
+
+            var tagName = e.target.tagName;
+
+            if (!('INPUT' == tagName || 'TEXTAREA' == tagName)) {
+                document.activeElement.blur();
+            }
+
+            window.noBlurFromInput = false;
+        });
+
+        window.JSB_CONFING = window.JSB_CONFING || {
+            ready : false
+        };
+
+        function onBridgeReady(event) {
+            if(!window.JSB_CONFING.mode){
+                window.JSB_CONFING.mode = 'ios';
+                window.JSB_CONFING.ready = true;
+                var bridge = event.bridge;
+                var uniqueId = 1;
+                bridge.init(function (message, responseCallback) {
+                });
+            }
+            if(window.setTitle){
+                window.setTitle(window.getTitle());
+            }
+        };
+        document.addEventListener('ActionBridgeReady', onBridgeReady, false);
+        
+        window.successAndroidReady = function(data){
+            window.JSBACCOUNINFO = data;
+            var ev = document.createEvent('HTMLEvents'); 
+            ev.initEvent('JSBOK', false, true); 
+            document.dispatchEvent(ev); 
+        }
+
+        window.errorAndroidReady = function(err){
+        }
+
+        function onAndroidReady(msg) {
+            window.JSB_CONFING.mode = 'android';
+            window.JSB_CONFING.ready = true;
+            window.ActionBridge.handleAction(
+                "get_trade_user_info", 
+                JSON.stringify({"type" : "common_trade_account","mustLoginWhenNull" : 1,"mustLive" : 1}),
+                'successAndroidReady',
+                'errorAndroidReady'
+            );
+            if(window.$){
+                $(document).trigger('WebViewJavascriptBridgeReady');
+            }
+
+            if(msg && msg.height){
+            var infos = JSON.parse(window.JavaScriptBridge.getDeviceInfo());
+                if(infos.sdkVersion <= 10){
+                    $('body').height(msg.height);
+                }
+            }
+            JavaScriptBridge.setTitle(window.getTitle());
+        }
+        
+        function getTitle () {
+            return localStorage.getItem('newsTitle') || '网络投票';
+        }
+    </script>
+    <body>
+        <!-- built files will be auto injected -->
+        <div id="mount"></div>
+    </body>
+
+</html>

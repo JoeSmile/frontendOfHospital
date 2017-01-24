@@ -1,0 +1,18 @@
+@import 'rem';
+
+html, body, #app {
+    //font-family: 'Microsoft YaHei', Arial, Helvetica, sans-serif;
+    font-family: "Droid Sans", "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+    height: 100%; background: #f2f2f2; padding: 0; margin: 0;
+}
+
+#app {
+    height: 100%; overflow-y: auto; -webkit-overflow-scrolling: touch;
+    &.no-scroll {overflow: hidden;}
+}
+* {margin: 0; padding: 0; outline: none; border: 0;}
+ul, li {list-style: none; margin: 0; padding: 0;}
+h1, h2, h3, h4, h5, p {margin: 0; padding: 0; font-weight: normal;}
+a {-webkit-tap-highlight-color: transparent; text-decoration: none;}
+
+textarea, input {margin: 0; padding: 0; border: 0; outline: none; color: #333;}
