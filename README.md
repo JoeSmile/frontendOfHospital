@@ -1,11 +1,3 @@
-# 广发证券手机APP股票投票
-
-交易模块下新开子功能，累积投票议案、非累积投票议案
-
-## Get the code
-
-```
-$ git clone http://gitlab.gf.com.cn/maqinghua/stock-vote.git
 ```
 
 ## Installation
