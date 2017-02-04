@@ -1,70 +1,82 @@
 <style lang="scss" scrope>
     @import './css/main';
-    .mint-tab-container-wrap{
-        height: 100%;
-    }
-    .content{
-        padding: 0;
-        height: calc(100% - 4rem);
-    }
-    .mint-tab-container.content{
-        padding:0rem;
-        box-sizing: border-box;
-    }
-    .footer{
-        height:4rem;
-        line-height: 4rem;
-        font-size:1.8rem;
-        .mint-tab-item-label{
+    $boderGray: #838383;
+    $fontBlack: #000000;
+
+    #app{
+        div.showView{
+            height: calc(100% - 3rem);
+            overflow-x: hidden;
+        }
+
+        div.nav{
+            color: #000000;
+            width: 100%;
+            display: flex;
+            position: relative;
+            bottom: 0;
             height: 3rem;
-            line-height: 3rem;
-            font-size: 1.5rem;
+            border-top: 1px solid $boderGray;
+            box-sizing: border-box;
+            .homePageLink,
+            .askOnlineLink{
+                border-right:1px solid $boderGray; 
+            }
+            a{
+                flex: 1;
+                text-align: center;
+                line-height: 3rem;
+                font-size: 1.7rem;
+            }
+            a:focus,a:visited,a:hover,a:active{
+                color:#000000;
+            }
         }
     }
 </style>
 
 <template>
     <div id='app'>
-        <mt-tab-container v-model="selected" class='content'>
-            <mt-tab-container-item id="homePage">
-               <homePage/>
-            </mt-tab-container-item>
-            <mt-tab-container-item id="askOnline">
-               <askOnline/>
-            </mt-tab-container-item>
-            <mt-tab-container-item id="mine">
-                <mine/>
-            </mt-tab-container-item>
-        </mt-tab-container>
-        <mt-tabbar v-model="selected" fixed class='footer'>
-            <mt-tab-item id="homePage">
-                <span>首页</span>
-            </mt-tab-item>
-            <mt-tab-item id="askOnline">
-                在线问诊
-            </mt-tab-item>
-            <mt-tab-item id="mine">
-                我的
-            </mt-tab-item>
-        </mt-tabbar>
+      <router-view  v-if='isLogin'></router-view>      
+      <div v-else>
+        <authen />
+      </div>
     </div>
 </template>
 
 <script>
-    import homePage from './homePage/homePage';
-    import askOnline from './askOnline/askOnline';
-    import mine from './mine/mine';
-    
+    import authen from './authen';
+    import api from './backend/api';
     export default {
          data(){
              return{
-                 selected:'homePage',
+                 isLogin:false
+             }
+         },
+         methods:{
+             login(){
+                 this.isLogin = true;
+                 this.doGetUserInfo();
+             },
+             doGetUserInfo(){
+                api.getUserInfo(this.$store.getters.weChatInfo).then((data)=>{
+                    var info = JSON.parse(data);
+                    this.$store.commit('USERINFO',info[0]);
+                    this.$store.commit('UPDATEUSERINFO');
+                })
              }
          },
          components:{
-             homePage,
-             askOnline,
-             mine
+             authen
+         },
+         created(){
+            this.$store.addChangeListener('LOGIN',this.login);
+         },
+         mounted(){
+            if(this.$store.state && this.$store.state.weChatInfo){
+                this.isLogin = true;
+                this.doGetUserInfo();
+            } 
          }
     }
 </script>

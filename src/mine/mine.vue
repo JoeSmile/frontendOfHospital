@@ -86,7 +86,6 @@
             background: url('../img/bindCard.png') no-repeat center center;
         }
     }
-    
 </style>
 
 <template>
@@ -94,7 +93,7 @@
        <div class="header">
            <div class='userInfo'>
               <span class='photo'></span>
-              <span class='name'>ABC</span>
+              <span class='name'>{{userInfo.username}}</span>
             </div>
            <ul class='funcGroup'>
                 <chipItem iconName='bindCard_icon' name='挂号'/>
@@ -105,24 +104,16 @@
        </div>
        <div clas='content'> 
            <ul>
-               <li class='funcItem'>
-                    <span class='bindCard_icon'></span><span class='name'>账单</span>
-                </li>
-                <li class='funcItem'>
-                    <span class='bindCard_icon'></span><span class='name'>管理就诊卡</span>
-                </li>
-                <li class='funcItem'>
-                    <span class='bindCard_icon'></span><span class='name'>检验报告</span>
-                </li>
-                <li class='funcItem'>
-                    <span class='bindCard_icon'></span><span class='name'>缴费记录</span>
-                </li>
+               <chipItem iconName='bindCard_icon' name='账单'/>
+               <chipItem iconName='bindCard_icon' name='管理就诊卡'/>
+               <chipItem iconName='bindCard_icon' name='检验报告'/>
+               <chipItem iconName='bindCard_icon' name='缴费记录'/>
            </ul>
             <ul>
                 <li class='funcItem'>
                     <span class='bindCard_icon'></span><span class='name'>问诊订单</span>
                 </li>
-                <li class='funcItem'>
+                <li class='funcItem' @click='medicalRecord'>
                     <span class='bindCard_icon'></span><span class='name'>问诊纪录</span>
                 </li>
                 <li class='funcItem'>
@@ -140,19 +131,46 @@
                     <span class='bindCard_icon'></span><span class='name'>纠纷直通车</span>
                 </li>
            </ul>
-       </div>
+        </div>
     </div>
 </template>
 
 <script>
     import chipItem from '../component/chipItem';
+    import api from '../backend/api';
+    import routerManager from '../routerManager';
     export default {
         components:{
-            chipItem
+            chipItem,
         },
         data: function (){
             return {
+                name:'AAA',
+                userInfo:{}
             }
+        },
+        methods:{
+            medicalRecord(){
+                api.getPatientRecord().then((data)=>{
+                    this.$store.commit('MEDICALRECORD',data);
+                    // 问诊记录
+                    routerManager.routerTo('singel/medicalRecord');
+                })
+            }
+        },
+
+        created(){
+            window.back = function () { // 定义左上角回退键的函数，否则退出webview
+                window.back = null;
+                return true;    // 如有自定义回退函数，必须返回true
+            };
+        },
+        
+        destory(){
+
+        },
+        mounted(){
+
         }
     }
 </script>

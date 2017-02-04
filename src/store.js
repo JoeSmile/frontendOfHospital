@@ -1,24 +1,28 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-
+import _ from 'underscore';
+import {EventEmitter} from 'events';
 Vue.use(Vuex)
 
 function sortList(a,b){
     return a.position_str > b.position_str;
 }
 
-export default new Vuex.Store({
+var store = new Vuex.Store({
     strict: process.env.NODE_ENV !== 'production', //在非生产环境下，使用严格模式
     modules: {
         user: {
             state:{
-                userInfo:{},
-               
+                weChatInfo:{},
+                userInfo:{}
             },
             getters:{
-                userInfo(state){
-                    return state.userInfo;
+                weChatInfo(state){
+                    return state.weChatInfo;
                 },
+                userInfo(state){
+                    return state.userInfo
+                }
             },
             mutations: {
                 /**
@@ -27,7 +31,7 @@ export default new Vuex.Store({
                  * @param {Object} user
                  */
                 SIGNIN(state, user) {
-                    state.userInfo = user;
+                    state.weChatInfo = user;
                     state.isLogin = true;
                 },
                 /**
@@ -35,10 +39,13 @@ export default new Vuex.Store({
                  * @param {Object} state
                  */
                 SIGNOUT(state) {
-                    state.userInfo = {};
+                    state.weChatInfo = {};
                     state.isLogin = false;
                     // sessionStorage.removeItem('user')
                     // Object.keys(state).forEach(k => Vue.delete(state, k))
+                },
+                USERINFO(state,info){
+                    state.userInfo = info;
                 },
                 /**
                  * @param {string} account
@@ -51,10 +58,27 @@ export default new Vuex.Store({
                 SIGNIN({commit}, user) {
                     commit('SIGNIN', user)
                 },
+                USERINFO({commit},info){
+                    commit('USERINFO',info);
+                },
                 SIGNOUT({commit}) {
                     commit('SIGNOUT')
                 }
             }
         }  // user over
     }   // modules
+})
+
+module.exports =  _.extend({},store,EventEmitter.prototype,{
+    addChangeListener(type,cbk){
+        this.on(type,cbk)
+    },
+    
+    removeChangeListener(type,cbk){
+        this.removeListener(type,cbk);
+    },
+
+    emitEvent(type,data){
+        this.emit(type,data);
+    }
 })

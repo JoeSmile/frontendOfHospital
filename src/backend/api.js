@@ -8,6 +8,9 @@ var DELETE_MENU_URL="https://api.weixin.qq.com/cgi-bin/menu/delete?access_token=
 var GET_WXUSER_INFO="https://api.weixin.qq.com/cgi-bin/user/info?access_token=ACCESS_TOKEN&openid=OPENID&lang=zh_CN";
 
 
+//http://mrhuangqiwei.6655.la/Hospital/AddFriend?openid=owEWzwQKO7G_uy4C0X_Wn2boPVI4&sfzh=513427199309232717&ylkh=&brxm=%E9%BB%84%E5%90%AF%E4%BD%8D&brxb=1&brjtzz=%E5%9B%9B%E5%B7%9D&lxdh=15577616194&nl=23&nldw=1&%E6%8F%90%E4%BA%A4=%E6%8F%90%E4%BA%A4
+// http://mrhuangqiwei.6655.la/Hospital/AddFriend?openid=owEWzwQKO7G_uy4C0X_Wn2boPVI4&sfzh=513427199309232717&ylkh=&brxm=%E9%BB%84%E5%90%AF%E4%BD%8D&brxb=1&brjtzz=%E5%9B%9B%E5%B7%9D&lxdh=15577616194&nldw=1&%E6%8F%90%E4%BA%A4=%E6%8F%90%E4%BA%A4
+
 var _backend = {
     /**
      * 绑定卡
@@ -19,7 +22,8 @@ var _backend = {
      * &brxm=%E9%BB%84%E5%90%AF%E4%BD%8D
      * &brxb=1
      * &brjtzz=%E5%9B%9B%E5%B7%9D
-     * &lxdh=15577616194&nl=23
+     * &lxdh=15577616194
+     * &nl=23
      * &nldw=1&%E6%8F%90%E4%BA%A4=%E6%8F%90%E4%BA%A4
      * 
      * @param {string} openid  
@@ -35,9 +39,9 @@ var _backend = {
                         返回值3 绑卡成工
                         返回值4 绑卡失败
      */
-    bindCard(openId, sfzh, ylkh, brxm,brxb,brjtzz,lxdh,nldw){
+    bindCard(openId, sfzh='', ylkh='', brxm='',brxb='',brjtzz='',nl='',lxdh='',nldw=''){
         return $.ajax({
-            url:`http://mrhuangqiwei.6655.la/Hospital/AddFriend?openid=${openId}&sfzh=${sfzh}&ylkh=${ylkh}&brxm=${brxm}&brxb=${brxb}&brjtzz=${brjtzz}&lxdh=${lxdh}&nldw=${nldw}`,
+            url:`http://mrhuangqiwei.6655.la/Hospital/AddFriend?openid=${openId}&sfzh=${sfzh}&ylkh=${ylkh}&brxm=${brxm}&brxb=${brxb}&brjtzz=${brjtzz}&nl=${nl}&lxdh=${lxdh}&nldw=1&提交=提交`,
             method:'GET',
             contentType:'text/plain'
         })
@@ -234,7 +238,8 @@ var _backend = {
     /**
      * 预约挂号
      * demo：
-     * http://mrhuangqiwei.6655.la/Hospital/yyghservlet?yyghrq=2016-10-19+10%3A47%3A29.173&brxm=%E7%BD%97%E9%98%B3&brxb=2&brnldw=1&sfzh=513427199204020224&jtzz=afaga&nl=12&sj=1241412431&yyys=0004&yyks=0004&yydjrq=2016-10-17+10%3A47%3A29.173&yyyxrq=2016-10-29+10%3A47%3A29.173&mxfyxmbm=130002&      yyjfbz=1&ylkh=&%E6%8F%90%E4%BA%A4=%E6%8F%90%E4%BA%A4
+     * http://mrhuangqiwei.6655.la/Hospital/yyghservlet?yyghrq=2016-10-19+10%3A47%3A29.173&brxm=%E7%BD%97%E9%98%B3&brxb=2&brnldw=1&sfzh=513427199204020224&jtzz=afaga&nl=12&sj=1241412431&yyys=0004&yyks=0004&yydjrq=2016-10-17+10%3A47%3A29.173&yyyxrq=2016-10-29+10%3A47%3A29.173&mxfyxmbm=130002&yyjfbz=1&ylkh=&%E6%8F%90%E4%BA%A4=%E6%8F%90%E4%BA%A4
+     * http://mrhuangqiwei.6655.la/Hospital/yyghservlet?yyghrq=2016-10-19&brxm=%E7%BD%97%E9%98%B3&brxb=2&brnldw=1&sfzh=513427199204020224&jtzz=afaga&nl=12&sj=1241412431&yyys=0004&yyks=0004&yydjrq=2016-10-17&yyyxrq=2016-10-29&mxfyxmbm=130002&yyjfbz=1&ylkh=&%E6%8F%90%E4%BA%A4=%E6%8F%90%E4%BA%A4
      * 
      *  yyghrq 预约挂号日期 格式：2016-09-07 12:00:00.000 这些从排班那里取就可以了
         brxm   病人姓名  从病人基本信息里面获得
@@ -279,7 +284,6 @@ var _backend = {
     /**  用户信息
      * demo:
      * http://mrhuangqiwei.6655.la/Hospital/UserInfoServlet?openid=owEWzwQKO7G_uy4C0X_Wn2boPVI4&%E6%8F%90%E4%BA%A4=%E6%8F%90%E4%BA%A4
-     * 
      * @returns {json} 
      * [{"userid":"owEWzwQKO7G_uy4C0X_Wn2boPVI4",
      *   "username":"蓝天",
@@ -304,7 +308,8 @@ var _backend = {
     */
     userInfo(openid){
          return $.ajax({
-            url:`http://mrhuangqiwei.6655.la/Hospital/UserInfoServlet=${openid}`,
+            // url:`http://mrhuangqiwei.6655.la/Hospital/UserInfoServlet=${openid}&提交=提交`,
+            url: `http://mrhuangqiwei.6655.la/Hospital/UserInfoServlet?openid=${openid}&%E6%8F%90%E4%BA%A4=%E6%8F%90%E4%BA%A4`,
             method:'GET',
             contentType:'text/plain'
          })
@@ -312,15 +317,62 @@ var _backend = {
 };
 
 var Store = {
-    login(id,psw){
-        return _backend.login(id,psw).then((data)=>{
-            var fixObj = FixMessage.fromString(data);
-            return JSON.parse(fixObj.data['96']);
-        },(err)=>{
-            return err;
-        })
+    login(){
+        return new Promise(function(resolve,reject){
+                    var info = {
+                        openid:'owEWzwQKO7G_uy4C0X_Wn2boPVI4',
+                        sfzh:'513427199309232717',
+                        brxm:'黄启位',
+                        brxb:'1',
+                        brjtzz:'四川',
+                        lxdh:'15577616194',
+                        nl:'23'
+                    }
+                    resolve( info );
+                });
     },
 
+    // 绑卡
+    bindCard(weChatInfo){
+        var {openid, sfzh, ylkh, brxm, brxb, brjtzz, nl, lxdh, nldw} = weChatInfo;
+        return _backend.bindCard(openid, sfzh, ylkh, brxm, brxb, brjtzz, nl, lxdh, nldw).then((data)=>{
+            // 返回值1 此卡已经绑定无需重复绑卡
+            // 返回值2 此卡无效请重新绑卡
+            // 返回值3 绑卡成工
+            // 返回值4 绑卡失败
+            var ret = '';
+            switch(data){
+                case '1':
+                    ret = '此卡已经绑定无需重复绑卡';
+                    break;
+                case '2':
+                    ret = '此卡无效请重新绑卡';
+                    break;
+                case '3':
+                    ret = '绑卡成功';
+                    break;
+                case '4':
+                    ret = '绑卡失败';
+                    break;
+                default:
+                    ret = '请重试';
+            }
+            return ret;
+        })
+    },
+    // 用户信息
+    getUserInfo(weChatInfo){
+        var {openid} = weChatInfo;
+        return _backend.userInfo(openid).then((data)=>{
+            return data;
+        })
+    },
+    // 病人记录/问诊记录
+    getPatientRecord(sfzh='513427197209290026'){
+        return _backend.patientRecord(sfzh).then((data)=>{
+            return data;
+        })
+    }
      
 };
 

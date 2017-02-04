@@ -174,7 +174,7 @@
                     </chipItem>
                 </div>
                 <div class='bindCard'>
-                    <chipItem iconName='bindCard_icon' name='绑卡'/>
+                    <chipItem iconName='bindCard_icon' name='绑卡' v-bind:doClick="doBindCard"/>
                 </div>
                 <div class='checkAppointment'>
                     <chipItem iconName='checkAppointment_icon' name='检查预约'/>
@@ -200,19 +200,43 @@
                  <chipItem iconName='bindCard_icon' name='智慧停车'/>
             </div>
         </section>
+        <!--通用-->
+        <my-dialog :show='showDialog' :cbClose='closeDialog'>
+        <p slot="title" class='title'>系统提示</p>
+        <p slot='content' class='content'>{{showResult}}</p>
+        <div slot='button' class='button'>
+            <button @click='closeDialog'>确定</button>
+        </div>
+    </my-dialog>
     </div>
 </template>
 
 <script>
     import chipItem from '../component/chipItem';
+    import authen from '../authen';
+    import api from '../backend/api';
+    import myDialog from '../component/dialog';
     export default {
         data: function () {
             return {
-                funcItems:[]
+                showDialog:false,
+                showResult:''
             }
         },
         components:{
             chipItem
-        }
-    }
+        },
+        methods:{
+            doBindCard(){
+                api.bindCard(this.$store.getters.weChatInfo).then((data)=>{
+                    this.showResult = data;
+                    this.showDialog = true;
+                });
+            },
+            closeDialog(){
+                this.showDialog = false;
+            }
+
+        },
+    }   
 </script>

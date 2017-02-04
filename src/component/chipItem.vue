@@ -3,7 +3,7 @@
 </style>
 
 <template>
-    <div class="chipItem">
+    <div class="chipItem" @click='oneClick'>
         <div :class='iconName'></div>
         <div class='name'>{{name}}</div>
         <slot name='dic'></slot>
@@ -12,10 +12,17 @@
 
 <script>
     export default {
-        props:['iconName','name'],
+        props:['iconName','name','doClick'],
         data: function () {
             return {
                
+            }
+        },
+        methods:{
+            oneClick(){
+                if(typeof this.doClick == 'function'){
+                    this.doClick();
+                }
             }
         }
     }
