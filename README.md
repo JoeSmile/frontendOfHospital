@@ -67,3 +67,6 @@ You can find all loaders in this [list](http://webpack.github.io/docs/list-of-lo
 * npm
 * webpack
 * vue
+2017.2.5
+接口调通，新增若干功能页面。
+下一步优化UI，添加微信接口，编写vue 组件
