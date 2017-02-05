@@ -152,14 +152,22 @@
         methods:{
             medicalRecord(){
                 api.getPatientRecord().then((data)=>{
-                    this.$store.commit('MEDICALRECORD',data);
+                    this.$store.commit('MEDICALRECORD',JSON.parse(data));
+                    console.log(data);
                     // 问诊记录
                     routerManager.routerTo('singel/medicalRecord');
                 })
+            },
+            updateUserInfo(info){
+                this.userInfo = info;
+            },
+            getUserInfo(){
+                this.userInfo = this.$store.getters.userInfo;
             }
         },
 
         created(){
+            this.$store.addChangeListener('UPDATEUSERINFO',this.updateUserInfo);
             window.back = function () { // 定义左上角回退键的函数，否则退出webview
                 window.back = null;
                 return true;    // 如有自定义回退函数，必须返回true
@@ -167,10 +175,10 @@
         },
         
         destory(){
-
+            this.$store.removeChangeListener('UPDATEUSERINFO',this.updateUserInfo);
         },
         mounted(){
-
+            this.getUserInfo();
         }
     }
 </script>

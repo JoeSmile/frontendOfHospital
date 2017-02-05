@@ -190,13 +190,13 @@
         </section>
         <section id='footer'>
             <div class="funcGroup">
-                 <chipItem iconName='bindCard_icon' name='便民门诊'/>
+                 <chipItem iconName='bindCard_icon'  v-bind:doClick='getLisreport' name='检查查询1'/>
                  <chipItem iconName='bindCard_icon' name='检查预约'/>
-                 <chipItem iconName='bindCard_icon' name='报告查询'/>
-                 <chipItem iconName='bindCard_icon' name='医生排班'/>
-                 <chipItem iconName='bindCard_icon' name='就医攻略'/>
-                 <chipItem iconName='bindCard_icon' name='意见收集'/>
-                 <chipItem iconName='bindCard_icon' name='纠纷调节'/>
+                 <chipItem iconName='bindCard_icon' v-bind:doClick='getRisReport' name='彩超报告查询'/>
+                 <chipItem iconName='bindCard_icon' v-bind:doClick="getDoctorSchedule" name='医生排班'/>
+                 <chipItem iconName='bindCard_icon' v-bind:doClick="getHospitalFee" name='住院信息'/>
+                 <chipItem iconName='bindCard_icon' v-bind:doClick="getDepartmentNO" name='科室信息'/>
+                 <chipItem iconName='bindCard_icon' v-bind:doClick="getCommonPatient" name='常用病人记录'/>
                  <chipItem iconName='bindCard_icon' name='智慧停车'/>
             </div>
         </section>
@@ -216,6 +216,8 @@
     import authen from '../authen';
     import api from '../backend/api';
     import myDialog from '../component/dialog';
+    import routerManager from '../routerManager';
+
     export default {
         data: function () {
             return {
@@ -235,8 +237,46 @@
             },
             closeDialog(){
                 this.showDialog = false;
+            },
+            unitCommit(type,data){
+                this.$store.commit(type,JSON.parse(data));
+            },
+            getDoctorSchedule(){
+                api.getDoctorSchedule('0004').then((data)=>{
+                    this.unitCommit('SET_DOCTORS_SCHEDULE',data);
+                    routerManager.routerTo('singel/doctorsSchedule');
+                })
+            },
+            getDepartmentNO(){
+                api.getDepartmentNO().then((data)=>{
+                    this.unitCommit('SET_DEPARTMENT_NO',data);
+                    routerManager.routerTo('singel/departmentNO');
+                })
+            },
+            getHospitalFee(){
+                api.getHospitalizationFee('2016003423').then((data)=>{
+                    this.unitCommit('SET_HOSPITALIZATION_FEE',data);
+                    routerManager.routerTo('singel/hospitalizationFee');
+                })
+            },
+            getCommonPatient(){
+                api.getCommonPatient('owEWzwQKO7G_uy4C0X_Wn2boPVI4').then((data)=>{
+                    this.unitCommit('SET_COMMON_PATIENT',data);
+                    routerManager.routerTo('singel/commonPatient');
+                });
+            },
+            getLisreport(){
+                api.getLisreport('2016003850').then((data)=>{
+                    this.unitCommit('SET_LISREPORT',data);
+                    routerManager.routerTo('singel/lisreport');
+                })
+            },
+            getRisReport(){
+                api.getRisReport('2016003857').then((data)=>{
+                    this.unitCommit('SET_RISREPORT',data);
+                    routerManager.routerTo('singel/risreport');
+                })
             }
-
         },
     }   
 </script>

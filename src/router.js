@@ -33,11 +33,35 @@ export default [
             },
             {
                 path:'/singel',
-                component: App,
+                component:resolve=>require(['./singel'],resolve),
                 children:[
                     {
                         path:'medicalRecord',
                         component:resolve => require(['./mine/medicalRecord'],resolve)
+                    },
+                    {
+                        path:'doctorsSchedule',
+                        component:resolve => require(['./homePage/doctorsSchedule'],resolve)
+                    },
+                    {
+                        path:'departmentNO',
+                        component:resolve => require(['./homePage/departmentNO'],resolve)
+                    },
+                    {
+                        path:'hospitalizationFee',
+                        component:resolve => require(['./homePage/hospitalizationFee'],resolve)
+                    },
+                    {
+                        path:"commonPatient",
+                        component:resolve => require(['./homePage/commonPatient'],resolve)
+                    },
+                    {
+                        path:'lisreport',
+                        component:resolve => require(['./homePage/lisreport'],resolve)
+                    },
+                    {
+                        path:'risreport',
+                        component:resolve => require(['./homePage/risreport'],resolve)
                     }
                 ]
             },

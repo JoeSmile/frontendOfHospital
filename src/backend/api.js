@@ -82,15 +82,15 @@ var _backend = {
      * 
      *   这里面最有用的就是那个ghxh，那个东西是医院识别病人的一 后个标志，查询它的挂号缴费情况，费用情况，处方情况，报告情况都是根据这个东西来查的
      */
-    patientRecord(sfzh,ylkh){
+    patientRecord(sfzh,ylkh=''){
         return $.ajax({
-            url:`http://mrhuangqiwei.6655.la/Hospital/getuserRecord?sfzh=${sfzh}&ylkh=${ylkh}`,
+            url:`http://mrhuangqiwei.6655.la/Hospital/getuserRecord?sfzh=${sfzh}&ylkh=${ylkh}&%E6%8F%90%E4%BA%A4=%E6%8F%90%E4%BA%A4`,
             method:'GET',
             contentType:'text/plain'
         })
     },
 
-    /** 常用就诊人记录
+    /** 常用就诊人记录 ok 为跨域
      * demo:
      * http://mrhuangqiwei.6655.la/Hospital/GetFriendinfo?openid=owEWzwQKO7G_uy4C0X_Wn2boPVI4&%E6%8F%90%E4%BA%A4=%E6%8F%90%E4%BA%A4
      * @param  {string} openid
@@ -107,14 +107,14 @@ var _backend = {
      * */
     commonPatient(openid){
         return $.ajax({
-            url:`http://mrhuangqiwei.6655.la/Hospital/GetFriendinfo?openid=${openid}`,
+            url:`http://mrhuangqiwei.6655.la/Hospital/GetFriendinfo?openid=${openid}&%E6%8F%90%E4%BA%A4=%E6%8F%90%E4%BA%A4`,
             method:'GET',
             contentType:'text/plain'
         })
     },
 
     /**
-     * 获取住院费用明细
+     * 获取住院费用明细 ok
      * demo:
      * http://mrhuangqiwei.6655.la/Hospital/userzyfymx?
      * @returns {JOSN} 
@@ -149,13 +149,18 @@ var _backend = {
         yhje  用户金额
         zyh  住院号
      * */ 
-    getHospitalizationFee(){
-
+    getHospitalizationFee(zyh=''){
+        //2016003423
+        return $.ajax({
+            url:` http://mrhuangqiwei.6655.la/Hospital/userzyfymx?zyh=${zyh}&%E6%8F%90%E4%BA%A4=%E6%8F%90%E4%BA%A4`,
+            method:'GET',
+            contentType:'text/plain'
+        })
     },
 
 
     /**
-     * 科室信息接口
+     * 科室信息接口 ok
      * http://mrhuangqiwei.6655.la/Hospital/Ksbmservlet
      * 
      * @returns {JSON}
@@ -189,7 +194,7 @@ var _backend = {
     },
 
     /**
-     * 删除常用就诊人接口
+     * 删除常用就诊人接口 
      * demo:
      * http://mrhuangqiwei.6655.la/Hospital/deletefriend?openid=owEWzwQKO7G_uy4C0X_Wn2boPVI4&sfzh=513489527456582&ylkh=&%E6%8F%90%E4%BA%A4=%E6%8F%90%E4%BA%A4
      * @param {string} openid 
@@ -206,7 +211,8 @@ var _backend = {
     },
 
     /**
-     * 医生排班 
+     * 医生排班  ok
+     * http://mrhuangqiwei.6655.la/Hospital/yspb?ksbm=0004&%E6%8F%90%E4%BA%A4=%E6%8F%90%E4%BA%A4
      * @returns {JSON} 
      * 医生排班分上午排班和下午排班但是参数都是一样的
         czybm 操作员编码 也就是医生编码
@@ -227,7 +233,7 @@ var _backend = {
         zcmc 职称名称
      * 
     */
-    doctorScheduling(){
+    doctorSchedule(ksbm=''){
         return $.ajax({
             url:`http://mrhuangqiwei.6655.la/Hospital/yspb?ksbm=${ksbm}`,
             method:'GET',
@@ -281,7 +287,7 @@ var _backend = {
         })
     },
 
-    /**  用户信息
+    /**  用户信息 ok
      * demo:
      * http://mrhuangqiwei.6655.la/Hospital/UserInfoServlet?openid=owEWzwQKO7G_uy4C0X_Wn2boPVI4&%E6%8F%90%E4%BA%A4=%E6%8F%90%E4%BA%A4
      * @returns {json} 
@@ -313,7 +319,63 @@ var _backend = {
             method:'GET',
             contentType:'text/plain'
          })
+    },
+    /** 检查查询 Lisreport
+     * 提交地址：http://mrhuangqiwei.6655.la/Hospital/Lisreport?zyh=2016003850&%E6%8F%90%E4%BA%A4=%E6%8F%90%E4%BA%A4
+     * @param {string}
+        bah:病案号
+        bbbh：仪器号
+        brnl：病人年龄
+        brxb：病人性别     1男 2 女 3 未知
+        brxm：病人姓名
+        cwh：床位号
+        cyrq：采样日期
+        djrq：登记日期
+        cklx:  参考类型
+        ckz_t ： 参考值-t
+        n_max   最大值
+        n_min    最小值
+        xh       序号
+        yblx     样本类型
+        ywmc    英文名称
+        zt     状态
+        zwmc   明细项目名称
+        jyxh   检验序号
+        jyxm    检验项目
+        ksbm    科室编码
+        ksmc     科室名称
+        mc       项目名称
+        nldw  年龄单位 1岁 2月  3 天
+        sbmc   设备名称
+        shrq   审核日期
+        shry    审核人员
+        shryxm   审核人员姓名 
+        sqrq   申请日期
+        sqys       申请医生
+        sqysxm    申请医生姓名
+        ybbm   样本编码
+        ybmc    样本名称
+        zxsb    执行设备编码
+        zxys    执行医生
+        zxysxm  执行医生姓名
+        dw      单位
+        lczd    临床诊断*/
+    getLisreport(zyh){
+        return $.ajax({
+            url: `http://mrhuangqiwei.6655.la/Hospital/Lisreport?zyh=${zyh}&%E6%8F%90%E4%BA%A4=%E6%8F%90%E4%BA%A4`,
+            method:'GET',
+            contentType:'text/plain'
+        })    
+    },
+    //彩超结果查询等 
+    getRisReport(zyh){
+        return $.ajax({
+            url: `http://mrhuangqiwei.6655.la/Hospital/RisReport?zyh=${zyh}&submit=%E6%8F%90%E4%BA%A4`,
+            method:'GET',
+            contentType:'text/plain'
+        }) 
     }
+
 };
 
 var Store = {
@@ -367,13 +429,43 @@ var Store = {
             return data;
         })
     },
-    // 病人记录/问诊记录
+    // 病人记录/问诊记录 
     getPatientRecord(sfzh='513427197209290026'){
         return _backend.patientRecord(sfzh).then((data)=>{
             return data;
         })
+    },
+    getDoctorSchedule(ksbm){
+        return _backend.doctorSchedule(ksbm).then((data)=>{
+            return data;
+        })
+    },
+    getDepartmentNO(){
+        return _backend.departmentInfomation().then((data)=>{
+            return data;
+        })
+    },
+    getHospitalizationFee(zyh){
+        return _backend.getHospitalizationFee(zyh).then((data)=>{
+            return data;
+        })
+    },
+    getCommonPatient(openid){
+         return _backend.commonPatient(openid).then((data)=>{
+            return data;
+        })
+    },
+    // 检查查询 1 
+    getLisreport(zyh){
+        return _backend.getLisreport(zyh).then((data)=>{
+            return data;
+        })
+    },
+    getRisReport(zyh){
+        return _backend.getRisReport(zyh).then((data)=>{
+            return data;
+        })
     }
-     
 };
 
 export default Store;

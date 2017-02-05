@@ -62,7 +62,7 @@
                 api.getUserInfo(this.$store.getters.weChatInfo).then((data)=>{
                     var info = JSON.parse(data);
                     this.$store.commit('USERINFO',info[0]);
-                    this.$store.commit('UPDATEUSERINFO');
+                    this.$store.emitEvent('UPDATEUSERINFO');
                 })
              }
          },
@@ -70,7 +70,14 @@
              authen
          },
          created(){
-            this.$store.addChangeListener('LOGIN',this.login);
+            var store = this.$store;
+            if(store.getters.userInfo && store.getters.userInfo.userid){
+                this.isLogin = true;
+            }
+            store.addChangeListener('LOGIN',this.login);
+         },
+         destroy(){
+            this.$store.removeChangeListener('LOGIN',this.login);
          },
          mounted(){
             if(this.$store.state && this.$store.state.weChatInfo){

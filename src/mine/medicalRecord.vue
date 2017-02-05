@@ -7,8 +7,8 @@
 <template>
     <div id='medicalRecord'>
         <ul>
-            <li v-for='item in info'>
-                {{item.ghxh}}
+            <li v-for='info in infos'>
+                {{info.brxm}}
             </li>
         </ul>
     </div>
@@ -19,14 +19,15 @@
     export default {
         data(){
             return{
-                info:[],
+                infos:[],
             }
         },
         components:{
 
         },
         mounted(){
-            this.info = this.$store.getters.medicalRecordInfo;
+            this.infos = this.$store.getters.medicalRecord;
+            // 就诊记录
         }
     }
 </script>

@@ -14,14 +14,42 @@ var store = new Vuex.Store({
         user: {
             state:{
                 weChatInfo:{},
-                userInfo:{}
+                userInfo:{},
+                medicalRecord:[],
+                doctorSchedule:{},
+                departmentNO:[],
+                hospitalizationFee:{},
+                commonPatient:[],
+                lisreport:[],
+                risreport:[]
             },
             getters:{
                 weChatInfo(state){
                     return state.weChatInfo;
                 },
                 userInfo(state){
-                    return state.userInfo
+                    return state.userInfo;
+                },
+                medicalRecord(state){
+                    return state.medicalRecord;
+                },
+                doctorSchedule(state){
+                    return state.doctorSchedule;
+                },
+                departmentNO(state){
+                    return state.departmentNO;
+                },
+                hospitalizationFee(state){
+                    return state.hospitalizationFee;
+                },
+                commonPatient(state){
+                    return state.commonPatient;
+                },
+                lisreport(state){
+                    return state.lisreport;
+                },
+                risreport(state){
+                    return state.risreport;
                 }
             },
             mutations: {
@@ -52,6 +80,27 @@ var store = new Vuex.Store({
                  */
                 SET_ACTIVE_ACCOUNT(state,account){
                     state.activeAccount = account;
+                },
+                MEDICALRECORD(state,data){
+                    state.medicalRecord = data;
+                },
+                SET_DOCTORS_SCHEDULE(state,data){
+                    state.doctorSchedule = data;
+                },
+                SET_DEPARTMENT_NO(state,data){
+                    state.departmentNO = data;
+                },
+                SET_HOSPITALIZATION_FEE(state,data){
+                    state.hospitalizationFee = data;
+                },
+                SET_COMMON_PATIENT(state,data){
+                    state.commonPatient = data;
+                },
+                SET_LISREPORT(state,data){
+                    state.lisreport = data;
+                },
+                SET_RISREPORT(state,data){
+                    state.risreport = data;
                 }
             },
             actions: {
@@ -62,8 +111,8 @@ var store = new Vuex.Store({
                     commit('USERINFO',info);
                 },
                 SIGNOUT({commit}) {
-                    commit('SIGNOUT')
-                }
+                    commit('SIGNOUT');
+                },
             }
         }  // user over
     }   // modules
