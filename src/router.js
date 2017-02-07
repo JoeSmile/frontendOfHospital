@@ -36,6 +36,10 @@ export default [
                 component:resolve=>require(['./singel'],resolve),
                 children:[
                     {
+                        path:'bindCard',
+                        component:resolve => require(['./homePage/bindCard'],resolve)
+                    },
+                    {
                         path:'medicalRecord',
                         component:resolve => require(['./mine/medicalRecord'],resolve)
                     },
@@ -62,6 +66,10 @@ export default [
                     {
                         path:'risreport',
                         component:resolve => require(['./homePage/risreport'],resolve)
+                    },
+                    {
+                        path:'patientAppointmentInfo',
+                        component:resolve => require(['./homePage/patientAppointmentInfo'],resolve)
                     }
                 ]
             },

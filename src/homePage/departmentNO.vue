@@ -1,14 +1,21 @@
 <style lang="scss" scoped>
     #departmentNO{
-
+        li{
+            height: 3rem;
+            font-size: 1.7rem;
+            text-indent: 3rem;
+            margin-top: 1rem;
+            border-bottom: 1px solid #838383;
+        }
     }
 </style>
 
 <template>
     <div id='departmentNO'>
         <ul>
-            <li v-for='item in departmentInfo'>
-                {{'科室名称：'+item.ksmc+'    科室编码：' + item.ksbm}}
+            <li>科室名称</li>
+            <li v-for='item in departmentInfo' :ksbm='item.ksbm' @click='getDoctorSchedule(item.ksbm)'>
+                {{item.ksmc}}
             </li>
         </ul>
     </div>
@@ -17,6 +24,7 @@
 <script>
     import chipItem from '../component/chipItem';
     import api from '../backend/api';
+    import routerManager from '../routerManager';
     export default {
         data: function () {
             return {
@@ -27,6 +35,12 @@
             chipItem
         },
         methods:{
+            getDoctorSchedule(ksbm){
+               api.getDoctorSchedule(ksbm).then((data)=>{
+                    this.unitCommit('SET_DOCTORS_SCHEDULE',JSON.parse(data));
+                    routerManager.routerTo('singel/doctorsSchedule');
+               })
+            }
         },
         mounted(){
            this.departmentInfo = this.$store.getters.departmentNO;

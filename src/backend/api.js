@@ -23,17 +23,18 @@ var _backend = {
      * &brxb=1
      * &brjtzz=%E5%9B%9B%E5%B7%9D
      * &lxdh=15577616194
-     * &nl=23
-     * &nldw=1&%E6%8F%90%E4%BA%A4=%E6%8F%90%E4%BA%A4
+     * &nl=23 
+     * &nldw=1
+     * &%E6%8F%90%E4%BA%A4=%E6%8F%90%E4%BA%A4
      * 
      * @param {string} openid  
-     * @param {string} sfzh 卡号？
+     * @param {string} sfzh 身份证号
      * @param {string} ylkh 当没有时就为空 ''
-     * @param {string} brxm 
+     * @param {string} brxm 病人姓名
      * @param {number} brxb  1 男 2 女 3 未知
      * @param {string} brjtzz 
-     * @param {string} lxdh 
-     * @param {string} nldw   1岁 2月 3天 ？？？？
+     * @param {string} lxdh  联系电话
+     * @param {string} nldw  1岁 2月 3天  年龄单位
      * @return {number} 返回值1 此卡已经绑定无需重复绑卡
                         返回值2 此卡无效请重新绑卡
                         返回值3 绑卡成工
@@ -320,6 +321,7 @@ var _backend = {
             contentType:'text/plain'
          })
     },
+
     /** 检查查询 Lisreport
      * 提交地址：http://mrhuangqiwei.6655.la/Hospital/Lisreport?zyh=2016003850&%E6%8F%90%E4%BA%A4=%E6%8F%90%E4%BA%A4
      * @param {string}
@@ -367,10 +369,35 @@ var _backend = {
             contentType:'text/plain'
         })    
     },
+
     //彩超结果查询等 
     getRisReport(zyh){
         return $.ajax({
             url: `http://mrhuangqiwei.6655.la/Hospital/RisReport?zyh=${zyh}&submit=%E6%8F%90%E4%BA%A4`,
+            method:'GET',
+            contentType:'text/plain'
+        }) 
+    },
+
+    // 查询病人预约信息
+    // http://mrhuangqiwei.6655.la/Hospital/FreindsYyinfo?
+    // openid=owEWzwQKO7G_uy4C0X_Wn2boPVI4&%E6%8F%90%E4%BA%A4=%E6%8F%90%E4%BA%A4
+    // 返回参数说明
+    // brxm 病人姓名
+    // sfzh 身份证号
+    // ylkh  医疗卡号
+    // yyys  预约医生
+    // czyxm  预约医生姓名
+    // yyrqmx 预约明细日期
+    // sj 手机
+    // ksmc  科室名称
+    // yyrq 预约日期
+    // yyghid 预约挂号ID
+    // brid   病人ID
+    // mzsbdd  门诊上班地点
+    getPatientAppointmentInfo(openid){
+         return $.ajax({
+            url: `http://mrhuangqiwei.6655.la/Hospital/FreindsYyinfo?openid=${openid}&%E6%8F%90%E4%BA%A4=%E6%8F%90%E4%BA%A4`,
             method:'GET',
             contentType:'text/plain'
         }) 
@@ -395,8 +422,8 @@ var Store = {
     },
 
     // 绑卡
-    bindCard(weChatInfo){
-        var {openid, sfzh, ylkh, brxm, brxb, brjtzz, nl, lxdh, nldw} = weChatInfo;
+    bindCard(param){
+        var {openid, sfzh, ylkh, brxm, brxb, brjtzz, nl, lxdh, nldw} = param;
         return _backend.bindCard(openid, sfzh, ylkh, brxm, brxb, brjtzz, nl, lxdh, nldw).then((data)=>{
             // 返回值1 此卡已经绑定无需重复绑卡
             // 返回值2 此卡无效请重新绑卡
@@ -463,6 +490,12 @@ var Store = {
     },
     getRisReport(zyh){
         return _backend.getRisReport(zyh).then((data)=>{
+            return data;
+        })
+    },
+    // 查询病人预约信息
+    getPatientAppointmentInfo(openid){
+        return _backend.getPatientAppointmentInfo(openid).then((data)=>{
             return data;
         })
     }

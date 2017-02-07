@@ -13,15 +13,26 @@ var store = new Vuex.Store({
     modules: {
         user: {
             state:{
+                //微信信息
                 weChatInfo:{},
+                //个人信息
                 userInfo:{},
+                //医疗记录
                 medicalRecord:[],
+                //医生排班
                 doctorSchedule:{},
+                //科室序号
                 departmentNO:[],
+                //住院费明细
                 hospitalizationFee:{},
+                //常用病人记录
                 commonPatient:[],
+                // 彩超，B超，CT，核磁等的结果查询
+                risreport:[],
+                //其它检查结果
                 lisreport:[],
-                risreport:[]
+                // 病人预约信息
+                patientAppointmentInfo:[]
             },
             getters:{
                 weChatInfo(state){
@@ -50,6 +61,9 @@ var store = new Vuex.Store({
                 },
                 risreport(state){
                     return state.risreport;
+                },
+                patientAppointmentInfo(state){
+                    return state.patientAppointmentInfo;
                 }
             },
             mutations: {
@@ -101,6 +115,9 @@ var store = new Vuex.Store({
                 },
                 SET_RISREPORT(state,data){
                     state.risreport = data;
+                },
+                SET_PATIENTAPPOINTMENTINFO(state, data){
+                    state.patientAppointmentInfo = data;
                 }
             },
             actions: {

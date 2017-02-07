@@ -193,21 +193,21 @@
                  <chipItem iconName='bindCard_icon'  v-bind:doClick='getLisreport' name='检查查询1'/>
                  <chipItem iconName='bindCard_icon' name='检查预约'/>
                  <chipItem iconName='bindCard_icon' v-bind:doClick='getRisReport' name='彩超报告查询'/>
-                 <chipItem iconName='bindCard_icon' v-bind:doClick="getDoctorSchedule" name='医生排班'/>
+                 <chipItem iconName='bindCard_icon' v-bind:doClick="getDepartmentNO" name='医生排班'/>
                  <chipItem iconName='bindCard_icon' v-bind:doClick="getHospitalFee" name='住院信息'/>
                  <chipItem iconName='bindCard_icon' v-bind:doClick="getDepartmentNO" name='科室信息'/>
                  <chipItem iconName='bindCard_icon' v-bind:doClick="getCommonPatient" name='常用病人记录'/>
-                 <chipItem iconName='bindCard_icon' name='智慧停车'/>
+                 <chipItem iconName='bindCard_icon' v-bind:doClick="getPatientAppointmentInfo" name='查询病人预约信息'/>
             </div>
         </section>
         <!--通用-->
         <my-dialog :show='showDialog' :cbClose='closeDialog'>
-        <p slot="title" class='title'>系统提示</p>
-        <p slot='content' class='content'>{{showResult}}</p>
-        <div slot='button' class='button'>
-            <button @click='closeDialog'>确定</button>
-        </div>
-    </my-dialog>
+            <p slot="title" class='title'>系统提示</p>
+            <p slot='content' class='content'>{{showResult}}</p>
+            <div slot='button' class='button'>
+                <button @click='closeDialog'>确定</button>
+            </div>
+        </my-dialog>
     </div>
 </template>
 
@@ -215,7 +215,6 @@
     import chipItem from '../component/chipItem';
     import authen from '../authen';
     import api from '../backend/api';
-    import myDialog from '../component/dialog';
     import routerManager from '../routerManager';
 
     export default {
@@ -229,18 +228,17 @@
             chipItem
         },
         methods:{
+            unitCommit(type,data){
+                this.$store.commit(type,JSON.parse(data));
+            },
+
             doBindCard(){
-                api.bindCard(this.$store.getters.weChatInfo).then((data)=>{
-                    this.showResult = data;
-                    this.showDialog = true;
-                });
+                routerManager.routerTo('singel/bindCard');
             },
             closeDialog(){
                 this.showDialog = false;
             },
-            unitCommit(type,data){
-                this.$store.commit(type,JSON.parse(data));
-            },
+           
             getDoctorSchedule(){
                 api.getDoctorSchedule('0004').then((data)=>{
                     this.unitCommit('SET_DOCTORS_SCHEDULE',data);
@@ -275,6 +273,12 @@
                 api.getRisReport('2016003857').then((data)=>{
                     this.unitCommit('SET_RISREPORT',data);
                     routerManager.routerTo('singel/risreport');
+                })
+            },
+            getPatientAppointmentInfo(){
+                api.getPatientAppointmentInfo('owEWzwQKO7G_uy4C0X_Wn2boPVI4').then((data)=>{
+                    this.unitCommit('SET_PATIENTAPPOINTMENTINFO',data);
+                    routerManager.routerTo('singel/patientAppointmentInfo');
                 })
             }
         },
