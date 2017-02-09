@@ -498,6 +498,11 @@ var Store = {
         return _backend.getPatientAppointmentInfo(openid).then((data)=>{
             return data;
         })
+    },
+    deleteCommonPatient(openid,sfzh,ylkh){
+        return _backend.deleteCommonPatient(openid,sfzh,ylkh).then((data)=>{
+            return data;
+        })
     }
 };
 

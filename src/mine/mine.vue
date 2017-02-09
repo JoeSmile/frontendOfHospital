@@ -1,4 +1,4 @@
-<style lang="scss">
+<style lang="scss" scoped>
     #mine{
         overflow: auto;
         height: 100%;
@@ -27,6 +27,7 @@
                     top: 3rem;
                     left: 3rem;
                     vertical-align: top;
+                    font-size: 2rem;
                 }
             }
             ul{
@@ -91,7 +92,7 @@
 <template>
     <div id='mine'>
        <div class="header">
-           <div class='userInfo'>
+           <div class='userInfo' @click='showUserInfo'>
               <span class='photo'></span>
               <span class='name'>{{userInfo.username}}</span>
             </div>
@@ -163,6 +164,9 @@
             },
             getUserInfo(){
                 this.userInfo = this.$store.getters.userInfo;
+            },
+            showUserInfo(){
+                 routerManager.routerTo('singel/userInfo');
             }
         },
 

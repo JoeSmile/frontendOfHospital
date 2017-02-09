@@ -54,14 +54,6 @@
             width: 3rem;
             background: url('../img/card.png') center center no-repeat;
         }
-        button{
-            font-size: 1.7rem;
-            margin: 1rem auto;
-            height: 3rem;
-            width: 24rem;
-            display:block;
-            border-radius: 4px;
-        }
         button.doBind{
             color: white;
             background-color: $bule;

@@ -37,7 +37,7 @@
         methods:{
             getDoctorSchedule(ksbm){
                api.getDoctorSchedule(ksbm).then((data)=>{
-                    this.unitCommit('SET_DOCTORS_SCHEDULE',JSON.parse(data));
+                    this.$store.commit('SET_DOCTORS_SCHEDULE',JSON.parse(data));
                     routerManager.routerTo('singel/doctorsSchedule');
                })
             }

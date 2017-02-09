@@ -190,14 +190,14 @@
         </section>
         <section id='footer'>
             <div class="funcGroup">
-                 <chipItem iconName='bindCard_icon'  v-bind:doClick='getLisreport' name='检查查询1'/>
-                 <chipItem iconName='bindCard_icon' name='检查预约'/>
+                 <chipItem iconName='bindCard_icon' v-bind:doClick='getLisreport' name='检查查询1'/>
                  <chipItem iconName='bindCard_icon' v-bind:doClick='getRisReport' name='彩超报告查询'/>
                  <chipItem iconName='bindCard_icon' v-bind:doClick="getDepartmentNO" name='医生排班'/>
-                 <chipItem iconName='bindCard_icon' v-bind:doClick="getHospitalFee" name='住院信息'/>
+                 <chipItem iconName='bindCard_icon' v-bind:doClick="getHospitalFee" name='住院费用'/>
                  <chipItem iconName='bindCard_icon' v-bind:doClick="getDepartmentNO" name='科室信息'/>
                  <chipItem iconName='bindCard_icon' v-bind:doClick="getCommonPatient" name='常用病人记录'/>
                  <chipItem iconName='bindCard_icon' v-bind:doClick="getPatientAppointmentInfo" name='查询病人预约信息'/>
+                 <chipItem iconName='bindCard_icon' name='XXXXXX'/>
             </div>
         </section>
         <!--通用-->
@@ -258,10 +258,11 @@
                 })
             },
             getCommonPatient(){
-                api.getCommonPatient('owEWzwQKO7G_uy4C0X_Wn2boPVI4').then((data)=>{
-                    this.unitCommit('SET_COMMON_PATIENT',data);
-                    routerManager.routerTo('singel/commonPatient');
-                });
+                routerManager.routerTo('singel/commonPatient');
+                // api.getCommonPatient('owEWzwQKO7G_uy4C0X_Wn2boPVI4').then((data)=>{
+                //     this.unitCommit('SET_COMMON_PATIENT',data);
+                //     routerManager.routerTo('singel/commonPatient');
+                // });
             },
             getLisreport(){
                 api.getLisreport('2016003850').then((data)=>{

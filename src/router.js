@@ -70,6 +70,10 @@ export default [
                     {
                         path:'patientAppointmentInfo',
                         component:resolve => require(['./homePage/patientAppointmentInfo'],resolve)
+                    },
+                    {
+                        path:'userInfo',
+                        component:resolve => require(['./mine/myselfInfo'],resolve)
                     }
                 ]
             },

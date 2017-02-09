@@ -1,4 +1,4 @@
-<style lang="scss" scrope>
+<style lang="scss">
     @import './css/main';
     $boderGray: #838383;
     $fontBlack: #000000;
@@ -32,6 +32,14 @@
                 color:#000000;
             }
         }
+    }
+    button{
+        font-size: 1.7rem;
+        margin: 1rem auto;
+        height: 3rem;
+        width: 24rem;
+        display:block;
+        border-radius: 4px;
     }
 </style>
 
@@ -70,6 +78,7 @@
              authen
          },
          created(){
+            this.isLogin = true;
             var store = this.$store;
             if(store.getters.userInfo && store.getters.userInfo.userid){
                 this.isLogin = true;
