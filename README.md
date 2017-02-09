@@ -73,3 +73,8 @@ You can find all loaders in this [list](http://webpack.github.io/docs/list-of-lo
 2017.2.7
 绑卡界面 弹框等完成
 科室信息列别表完成
+2017.2.9
+医生值班组件
+个人信息组件
+常用就诊人组件 完成
+
