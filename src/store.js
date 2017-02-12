@@ -118,7 +118,11 @@ var store = new Vuex.Store({
                 },
                 SET_PATIENTAPPOINTMENTINFO(state, data){
                     state.patientAppointmentInfo = data;
+                },
+                DELETE_COMMON_PATIENT(state,index){
+                    state.commonPatient.splice(index ,1);
                 }
+              
             },
             actions: {
                 SIGNIN({commit}, user) {

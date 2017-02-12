@@ -1,6 +1,6 @@
 <style lang="scss" scoped>
     #singel{
-
+        height: 100%;
     }
 </style>
 

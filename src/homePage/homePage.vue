@@ -235,6 +235,7 @@
             doBindCard(){
                 routerManager.routerTo('singel/bindCard');
             },
+
             closeDialog(){
                 this.showDialog = false;
             },
@@ -252,17 +253,16 @@
                 })
             },
             getHospitalFee(){
-                api.getHospitalizationFee('2016003423').then((data)=>{
-                    this.unitCommit('SET_HOSPITALIZATION_FEE',data);
+                api.getCommonPatient('owEWzwQKO7G_uy4C0X_Wn2boPVI4').then((data)=>{
+                     this.unitCommit('SET_COMMON_PATIENT',data);
                     routerManager.routerTo('singel/hospitalizationFee');
-                })
+                });
             },
             getCommonPatient(){
-                routerManager.routerTo('singel/commonPatient');
-                // api.getCommonPatient('owEWzwQKO7G_uy4C0X_Wn2boPVI4').then((data)=>{
-                //     this.unitCommit('SET_COMMON_PATIENT',data);
-                //     routerManager.routerTo('singel/commonPatient');
-                // });
+                api.getCommonPatient('owEWzwQKO7G_uy4C0X_Wn2boPVI4').then((data)=>{
+                    this.unitCommit('SET_COMMON_PATIENT',data);
+                    routerManager.routerTo('singel/commonPatient');
+                });
             },
             getLisreport(){
                 api.getLisreport('2016003850').then((data)=>{

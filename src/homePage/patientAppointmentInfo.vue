@@ -1,6 +1,17 @@
 <style lang="scss" scoped>
     #patientAppointmentInfo{
-
+        font-size:1.7rem;
+        ul li{
+            border-bottom: 1px solid #838383;
+            padding: 1rem;
+            div{
+                display:flex;
+                box-sizing: border-box;
+                span{
+                    flex:1;
+                }
+            }
+        }
     }
 </style>
 
@@ -8,7 +19,25 @@
     <div id='patientAppointmentInfo'>
         <ul>
             <li v-for='info in infos'>
-                {{info.brxm}}
+                <div><span>姓名: {{info.brxm}}</span><span>科室: {{info.ksmc}}</span></div>
+                <div><span>预约医生: {{info.czyxm}}</span><span>地址: {{info.mzsbdd}}</span></div>
+                <div><span>预约日期: {{info.yyrq}}</span></div>
+                <div><span>手机号: {{info.sj}}</span></div>
+                <div><span>预约号码: {{info.brid.trim()}}</span></div>
+            </li>
+             <li v-for='info in infos'>
+                <div><span>姓名: {{info.brxm}}</span><span>科室: {{info.ksmc}}</span></div>
+                <div><span>预约医生: {{info.czyxm}}</span><span>地址: {{info.mzsbdd}}</span></div>
+                <div><span>预约日期: {{info.yyrq}}</span></div>
+                <div><span>手机号: {{info.sj}}</span></div>
+                <div><span>预约号码: {{info.brid.trim()}}</span></div>
+            </li>
+             <li v-for='info in infos'>
+                <div><span>姓名: {{info.brxm}}</span><span>科室: {{info.ksmc}}</span></div>
+                <div><span>预约医生: {{info.czyxm}}</span><span>地址: {{info.mzsbdd}}</span></div>
+                <div><span>预约日期: {{info.yyrq}}</span></div>
+                <div><span>手机号: {{info.sj}}</span></div>
+                <div><span>预约号码: {{info.brid.trim()}}</span></div>
             </li>
         </ul>
     </div>

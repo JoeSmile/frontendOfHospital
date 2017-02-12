@@ -7,10 +7,7 @@ var QUER_MENU_URL="https://api.weixin.qq.com/cgi-bin/menu/get?access_token=ACCES
 var DELETE_MENU_URL="https://api.weixin.qq.com/cgi-bin/menu/delete?access_token=ACCESS_TOKEN";
 var GET_WXUSER_INFO="https://api.weixin.qq.com/cgi-bin/user/info?access_token=ACCESS_TOKEN&openid=OPENID&lang=zh_CN";
 
-
-//http://mrhuangqiwei.6655.la/Hospital/AddFriend?openid=owEWzwQKO7G_uy4C0X_Wn2boPVI4&sfzh=513427199309232717&ylkh=&brxm=%E9%BB%84%E5%90%AF%E4%BD%8D&brxb=1&brjtzz=%E5%9B%9B%E5%B7%9D&lxdh=15577616194&nl=23&nldw=1&%E6%8F%90%E4%BA%A4=%E6%8F%90%E4%BA%A4
-// http://mrhuangqiwei.6655.la/Hospital/AddFriend?openid=owEWzwQKO7G_uy4C0X_Wn2boPVI4&sfzh=513427199309232717&ylkh=&brxm=%E9%BB%84%E5%90%AF%E4%BD%8D&brxb=1&brjtzz=%E5%9B%9B%E5%B7%9D&lxdh=15577616194&nldw=1&%E6%8F%90%E4%BA%A4=%E6%8F%90%E4%BA%A4
-
+var URL = 'http://mrhuangqiwei.6655.la';
 var _backend = {
     /**
      * 绑定卡
@@ -42,7 +39,7 @@ var _backend = {
      */
     bindCard(openId, sfzh='', ylkh='', brxm='',brxb='',brjtzz='',nl='',lxdh='',nldw=''){
         return $.ajax({
-            url:`http://mrhuangqiwei.6655.la/Hospital/AddFriend?openid=${openId}&sfzh=${sfzh}&ylkh=${ylkh}&brxm=${brxm}&brxb=${brxb}&brjtzz=${brjtzz}&nl=${nl}&lxdh=${lxdh}&nldw=1&提交=提交`,
+            url:`${URL}/Hospital/AddFriend?openid=${openId}&sfzh=${sfzh}&ylkh=${ylkh}&brxm=${brxm}&brxb=${brxb}&brjtzz=${brjtzz}&nl=${nl}&lxdh=${lxdh}&nldw=1&提交=提交`,
             method:'GET',
             contentType:'text/plain'
         })
@@ -85,7 +82,7 @@ var _backend = {
      */
     patientRecord(sfzh,ylkh=''){
         return $.ajax({
-            url:`http://mrhuangqiwei.6655.la/Hospital/getuserRecord?sfzh=${sfzh}&ylkh=${ylkh}&%E6%8F%90%E4%BA%A4=%E6%8F%90%E4%BA%A4`,
+            url:`${URL}/Hospital/getuserRecord?sfzh=${sfzh}&ylkh=${ylkh}&%E6%8F%90%E4%BA%A4=%E6%8F%90%E4%BA%A4`,
             method:'GET',
             contentType:'text/plain'
         })
@@ -108,7 +105,7 @@ var _backend = {
      * */
     commonPatient(openid){
         return $.ajax({
-            url:`http://mrhuangqiwei.6655.la/Hospital/GetFriendinfo?openid=${openid}&%E6%8F%90%E4%BA%A4=%E6%8F%90%E4%BA%A4`,
+            url:`${URL}/Hospital/GetFriendinfo?openid=${openid}&%E6%8F%90%E4%BA%A4=%E6%8F%90%E4%BA%A4`,
             method:'GET',
             contentType:'text/plain'
         })
@@ -117,7 +114,7 @@ var _backend = {
     /**
      * 获取住院费用明细 ok
      * demo:
-     * http://mrhuangqiwei.6655.la/Hospital/userzyfymx?
+     * http://mrhuangqiwei.6655.la/Hospital/userzyfymx?zyh=2016003850&%E6%8F%90%E4%BA%A4=%E6%8F%90%E4%BA%A4
      * @returns {JOSN} 
      *  userinfo  这里是一个病人费用基本信息的json
         zyh 住院号
@@ -153,7 +150,7 @@ var _backend = {
     getHospitalizationFee(zyh=''){
         //2016003423
         return $.ajax({
-            url:` http://mrhuangqiwei.6655.la/Hospital/userzyfymx?zyh=${zyh}&%E6%8F%90%E4%BA%A4=%E6%8F%90%E4%BA%A4`,
+            url:`${URL}/Hospital/userzyfymx?zyh=${zyh}&%E6%8F%90%E4%BA%A4=%E6%8F%90%E4%BA%A4`,
             method:'GET',
             contentType:'text/plain'
         })
@@ -188,7 +185,7 @@ var _backend = {
     */
     departmentInfomation(){
         return $.ajax({
-            url:`http://mrhuangqiwei.6655.la/Hospital/Ksbmservlet`,
+            url:`${URL}/Hospital/Ksbmservlet`,
             method:'GET',
             contentType:'text/plain'
         })
@@ -205,10 +202,31 @@ var _backend = {
     */
     deleteCommonPatient(openid,sfzh,ylkh){
          return $.ajax({
-            url:`http://mrhuangqiwei.6655.la/Hospital/deletefriend?openid=${openid}&sfzh=${sfzh}&ylkh=${ylkh}`,
+            url:`${URL}/Hospital/deletefriend?openid=${openid}&sfzh=${sfzh}&ylkh=${ylkh}`,
             method:'GET',
             contentType:'text/plain'
-        })
+         })
+    },
+    /**
+     * 
+     * http://mrhuangqiwei.6655.la/Hospital/updatefriend?openid=owEWzwQKO7G_uy4C0X_Wn2boPVI4&sfzh=141341&sfzhold=1&ylkh=&brxm=afa&brxb=1&brjtzz=%E5%B9%B4%E5%85%B3%E9%82%A3%E7%83%A6%E4%BD%A0&brdh=15577616168&nl=23&%E6%8F%90%E4%BA%A4=%E6%8F%90%E4%BA%A4
+        提交参数说明
+        openid  用户的id
+        sfzh    修改后的身份证号
+        sfzhold  修改之前的身份证号  该字段从常用就诊人接口就可以获得
+        ylkh  医疗卡号   该字段从常用就诊人接口就可以获得
+        brxm 病人姓名
+        brxb 病人性别  1 男 2  女
+        brjtzz 病人家庭住址
+        brdh  病人电话
+        nl 年龄
+    */
+    editCommonPatient(openid,sfzh,sfzhold,ylkh,brxm,brxb,brjtzz,brdh,nl){
+         return $.ajax({
+            url:`${URL}/Hospital/updatefriend?openid=${openid}&sfzh=${sfzh}&sfzhold=${sfzhold}&ylkh=${ylkh}&brxm=${brxm}&brxb=${brxb}&brjtzz=${brjtzz}&brdh=${brdh}&nl=${nl}&%E6%8F%90%E4%BA%A4=%E6%8F%90%E4%BA%A4`,
+            method:'GET',
+            contentType:'text/plain'
+         })
     },
 
     /**
@@ -236,7 +254,7 @@ var _backend = {
     */
     doctorSchedule(ksbm=''){
         return $.ajax({
-            url:`http://mrhuangqiwei.6655.la/Hospital/yspb?ksbm=${ksbm}`,
+            url:`${URL}/Hospital/yspb?ksbm=${ksbm}`,
             method:'GET',
             contentType:'text/plain'
         })
@@ -267,7 +285,7 @@ var _backend = {
     */
     appointmentOfregister(yyghrq,brxm,brxb,brnldw,sfzh,jtzz,nl,sj,yyys,yyks,yydjrq,yyyxrq,mxfyxmbm,yyjfbz,ylkh){
         return $.ajax({
-            url:`http://mrhuangqiwei.6655.la/Hospital/yyghservlet?
+            url:`${URL}/Hospital/yyghservlet?
                 yyghrq=${yyghrq}
                 &brxm=${brxm}
                 &brxb=${brxb}
@@ -316,7 +334,7 @@ var _backend = {
     userInfo(openid){
          return $.ajax({
             // url:`http://mrhuangqiwei.6655.la/Hospital/UserInfoServlet=${openid}&提交=提交`,
-            url: `http://mrhuangqiwei.6655.la/Hospital/UserInfoServlet?openid=${openid}&%E6%8F%90%E4%BA%A4=%E6%8F%90%E4%BA%A4`,
+            url: `${URL}/Hospital/UserInfoServlet?openid=${openid}&%E6%8F%90%E4%BA%A4=%E6%8F%90%E4%BA%A4`,
             method:'GET',
             contentType:'text/plain'
          })
@@ -364,7 +382,7 @@ var _backend = {
         lczd    临床诊断*/
     getLisreport(zyh){
         return $.ajax({
-            url: `http://mrhuangqiwei.6655.la/Hospital/Lisreport?zyh=${zyh}&%E6%8F%90%E4%BA%A4=%E6%8F%90%E4%BA%A4`,
+            url: `${URL}/Hospital/Lisreport?zyh=${zyh}&%E6%8F%90%E4%BA%A4=%E6%8F%90%E4%BA%A4`,
             method:'GET',
             contentType:'text/plain'
         })    
@@ -373,7 +391,7 @@ var _backend = {
     //彩超结果查询等 
     getRisReport(zyh){
         return $.ajax({
-            url: `http://mrhuangqiwei.6655.la/Hospital/RisReport?zyh=${zyh}&submit=%E6%8F%90%E4%BA%A4`,
+            url: `${URL}/Hospital/RisReport?zyh=${zyh}&submit=%E6%8F%90%E4%BA%A4`,
             method:'GET',
             contentType:'text/plain'
         }) 
@@ -397,13 +415,39 @@ var _backend = {
     // mzsbdd  门诊上班地点
     getPatientAppointmentInfo(openid){
          return $.ajax({
-            url: `http://mrhuangqiwei.6655.la/Hospital/FreindsYyinfo?openid=${openid}&%E6%8F%90%E4%BA%A4=%E6%8F%90%E4%BA%A4`,
+            url: `${URL}/Hospital/FreindsYyinfo?openid=${openid}&%E6%8F%90%E4%BA%A4=%E6%8F%90%E4%BA%A4`,
             method:'GET',
             contentType:'text/plain'
         }) 
-    }
-
-};
+    },
+    /**
+     * 
+     * http://mrhuangqiwei.6655.la/Hospital/FriendInfo?sfzh=513426199702174929&ylkh=513426199702174929&submit=%E6%8F%90%E4%BA%A4
+        传递参数: sfzh 如：513426199702174929   ylkh 如：00006016 当这两个参数中有为空的时候就传空数据。
+        其中sfzh,ylkh 是从患者基本信息里面得到的
+        参数说明：
+        brid：病人ID
+        brnl:病人年龄
+        brnldw：病人年龄单位
+        brxb：病人性别
+        brxm:病人姓名
+        ghrq:挂号日期       说明：     精确到了毫秒
+        ghxh: 挂号序号       说明：该参数特别重要，所有信息都从这里开始。当ylklxbm="01"时 是挂号序号 ,当医疗卡llklxbm="02"时该字段是住院号
+        jtzz:家庭住
+        mzbm：名族编码
+        sfzh：身份证号
+        sj: 手机
+        ylkh:医疗卡号
+        ylklxbm：医疗卡类型编码
+     */
+    getPatientDetailInfo(sfzh,ylkh){
+         return $.ajax({
+            url: `${URL}/Hospital/FriendInfo?sfzh=${sfzh}&ylkh=${ylkh}&submit=%E6%8F%90%E4%BA%A4`,
+            method:'GET',
+            contentType:'text/plain'
+        }) 
+    },
+ };
 
 var Store = {
     login(){
@@ -501,6 +545,16 @@ var Store = {
     },
     deleteCommonPatient(openid,sfzh,ylkh){
         return _backend.deleteCommonPatient(openid,sfzh,ylkh).then((data)=>{
+            return data;
+        })
+    },
+    editCommonPatient(openid,sfzh,sfzhold,ylkh,brxm,brxb,brjtzz,brdh,nl){
+         return _backend.editCommonPatient(openid,sfzh,sfzhold,ylkh,brxm,brxb,brjtzz,brdh,nl).then((data)=>{
+            return data;
+        })
+    },
+    getPatientDetailInfo(sfzh='',ylkh=''){
+        return _backend.getPatientDetailInfo(sfzh,ylkh).then((data)=>{
             return data;
         })
     }

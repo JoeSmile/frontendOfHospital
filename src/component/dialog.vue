@@ -21,6 +21,12 @@
     background: #fff;
     border-radius: 8px;
     text-align: center;
+    .title{
+      height: 3rem;
+      padding-top: 1.5rem;
+      font-size:   1.7rem;
+      font-weight: 500;
+    }
   }
 
   .dialog-fade-transition {
@@ -31,11 +37,7 @@
   .dialog-fade-leave {
     opacity: 0;
   }
-  .title{
-    padding-top: 1.5rem;
-    font-size:   1.7rem;
-    font-weight: 500;
-  }
+  
   .content{
     padding: 2rem;
     word-break: break-all;
