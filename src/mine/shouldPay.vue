@@ -7,6 +7,10 @@
         .flex2{
             flex:2;
         }
+        .doPay{
+            width: 5rem;
+            margin: 0.5rem 2rem 0 0;
+        }
         ul{
             padding: 1rem;
             box-sizing: border-box;
@@ -42,7 +46,7 @@
         <ul v-else-if='step=="THREE"' class='stepThree'>
             <p class='title center'>门诊费用应缴清单</p>
             <li><span>姓名:{{total.patName}}</span><span>门诊医生:{{total.docName}}</span></li>
-            <li><span>总费用:{{total.pay}}</span></li>
+            <li><span>总费用:{{total.pay}}</span><button class='doPay' @click='doPay'>付款</button></li>
             <li><span class='flex2'>项目名称</span><span>数量</span><span>单价</span><span>金额</span></li>
             <li v-for='item in paylist'>
                 <span class='flex2'>{{item.mxfyxmmc}}</span>
@@ -91,6 +95,9 @@
                     this.step = 'THREE';
                 })
             },
+            doPay(){
+
+            }
             
         },
 
