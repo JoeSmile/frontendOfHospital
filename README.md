@@ -77,4 +77,5 @@ You can find all loaders in this [list](http://webpack.github.io/docs/list-of-lo
 医生值班组件
 个人信息组件
 常用就诊人组件 完成
-
+2017.2.17
+添加多个组件
