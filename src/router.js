@@ -82,6 +82,10 @@ export default [
                     {
                         path:'getTreatSpend',
                         component:resolve => require(['./mine/treatSpend'],resolve)
+                    },
+                    {
+                        path:'shouldPay',
+                        component:resolve => require(['./mine/shouldPay'],resolve)
                     }
                 ]
             },

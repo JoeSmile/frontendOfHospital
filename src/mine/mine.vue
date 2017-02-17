@@ -111,8 +111,8 @@
                 <li class='funcItem' @click='medicalRecord'>
                     <span class='bindCard_icon'></span><span class='name'>问诊纪录</span>
                 </li>
-                <li class='funcItem'>
-                    <span class='bindCard_icon'></span><span class='name'>我的医生</span>
+                <li class='funcItem' @click='shouldPay'>
+                    <span class='bindCard_icon'></span><span class='name'>应缴费用</span>
                 </li>
                 <li class='funcItem'>
                     <span class='bindCard_icon'></span><span class='name'>管理就诊人</span>
@@ -166,6 +166,12 @@
             },
             showUserInfo(){
                  routerManager.routerTo('singel/userInfo');
+            },
+            shouldPay(){
+                api.getCommonPatient('owEWzwQKO7G_uy4C0X_Wn2boPVI4').then((data)=>{
+                    this.$store.commit('SET_COMMON_PATIENT',JSON.parse(data));
+                    routerManager.routerTo('singel/shouldPay');
+                });
             }
         },
 
