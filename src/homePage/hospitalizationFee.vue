@@ -27,16 +27,19 @@
 <template>
     <div id='hospitalizationFee'>
         <ul v-if='step=="ONE"'>
+            <li>常用就诊人信息</li>
             <li v-for='item in commonPatient' @click='getDetailInfo(item)'>
                 {{item.brxm}}
             </li>
         </ul>
         <ul v-else-if='step=="TWO"'>
-            <li v-for='item in patientInfo' @click='getHospitalizationFee(item)'>
+            <li>就诊信息</li>
+            <li v-for='item in patientInfo' @click='getHospitalizationFee(item)' v-if='item.ylklxbm=="02"'>
                 <span>{{item.brxm}}</span><span>{{item.ghxh.substr(0,8)}}</span>
             </li>
         </ul>
         <div v-else-if='step=="THREE"'>
+            <div>住院费清单</div>
             <div class="header">
                 <div><span>住院号:{{fee.zyh}}</span><span>姓名:{{fee.brxm}}</span></div>
                 <div><span>科室:{{fee.ksmc}}</span></div>

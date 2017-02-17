@@ -7,7 +7,7 @@ var QUER_MENU_URL="https://api.weixin.qq.com/cgi-bin/menu/get?access_token=ACCES
 var DELETE_MENU_URL="https://api.weixin.qq.com/cgi-bin/menu/delete?access_token=ACCESS_TOKEN";
 var GET_WXUSER_INFO="https://api.weixin.qq.com/cgi-bin/user/info?access_token=ACCESS_TOKEN&openid=OPENID&lang=zh_CN";
 
-var URL = 'http://mrhuangqiwei.6655.la';
+var URL = 'http://219.141.78.173';//'http://mrhuangqiwei.6655.la';
 var _backend = {
     /**
      * 绑定卡
@@ -156,7 +156,7 @@ var _backend = {
         })
     },
 
-
+    
     /**
      * 科室信息接口 ok
      * http://mrhuangqiwei.6655.la/Hospital/Ksbmservlet
@@ -447,6 +447,24 @@ var _backend = {
             contentType:'text/plain'
         }) 
     },
+
+    //处方查询
+    //http://219.141.78.173/Hospital/Mzzycf?ghxh=20161127000001&%E6%8F%90%E4%BA%A4=%E6%8F%90%E4%BA%A4
+    prescriptionQuery(ghxh){
+        return $.ajax({
+            url: `${URL}/Hospital/Mzzycf?ghxh=${ghxh}&%E6%8F%90%E4%BA%A4=%E6%8F%90%E4%BA%A4`,
+            method:'GET',
+            contentType:'text/plain'
+        }) 
+    },
+
+    getTreatSpend(ghxh){
+        return $.ajax({
+            url: `${URL}/Hospital/getbrmzfyServlet?ghxh=${ghxh}&提交=提交`,
+            method:'GET',
+            contentType:'text/plain'
+        }) 
+    }
  };
 
 var Store = {
@@ -555,6 +573,16 @@ var Store = {
     },
     getPatientDetailInfo(sfzh='',ylkh=''){
         return _backend.getPatientDetailInfo(sfzh,ylkh).then((data)=>{
+            return data;
+        })
+    },
+    getPrescription(ghxh){
+        return _backend.prescriptionQuery(ghxh).then((data)=>{
+            return data;
+        })
+    },
+    getTreatSpend(ghxh){
+        return _backend.getTreatSpend(ghxh).then((data)=>{
             return data;
         })
     }

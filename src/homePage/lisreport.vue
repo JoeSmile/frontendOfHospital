@@ -76,7 +76,6 @@
             <ul slot='content' v-if='showItem' class='showArea'>
                 <li class='oneRow'><span class='name'>姓名: {{showItem.brxm}}</span><span class='sex'>性别: {{showItem.brxb=='1'?'男':'女'}}</span><span class='age'>年龄: {{showItem.brnl}}岁</span></li>
                 <li><span class=''>病案号: {{showItem.bah}}</span></li>
-                <li><span class='label'>采样日期: {{showItem.cyrq}}</span></li>
                 <li><span class='label'>住院号: {{showItem.cwh}}</span><span class='label'>科室: {{showItem.ksmc}}</span></li>
                 <li><span class='label'>项目: {{showItem.mc}}</span><span class='label'>执行医生: {{showItem.zxys}}</span></li>
                 <li><span class='label'>仪器: {{showItem.sbmc}}</span></li>

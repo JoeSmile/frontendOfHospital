@@ -74,6 +74,14 @@ export default [
                     {
                         path:'userInfo',
                         component:resolve => require(['./mine/myselfInfo'],resolve)
+                    },
+                    {
+                        path:'getPrescription',
+                        component:resolve => require(['./homePage/getPrescription'],resolve)
+                    },
+                    {
+                        path:'getTreatSpend',
+                        component:resolve => require(['./mine/treatSpend'],resolve)
                     }
                 ]
             },

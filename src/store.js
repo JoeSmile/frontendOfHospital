@@ -32,7 +32,9 @@ var store = new Vuex.Store({
                 //其它检查结果
                 lisreport:[],
                 // 病人预约信息
-                patientAppointmentInfo:[]
+                patientAppointmentInfo:[],
+                // 门诊费用
+                treatSpend:{}
             },
             getters:{
                 weChatInfo(state){
@@ -64,6 +66,9 @@ var store = new Vuex.Store({
                 },
                 patientAppointmentInfo(state){
                     return state.patientAppointmentInfo;
+                },
+                treatSpend(state){
+                    return state.treatSpend;
                 }
             },
             mutations: {
@@ -95,7 +100,7 @@ var store = new Vuex.Store({
                 SET_ACTIVE_ACCOUNT(state,account){
                     state.activeAccount = account;
                 },
-                MEDICALRECORD(state,data){
+                SET_MEDICALRECORD(state,data){
                     state.medicalRecord = data;
                 },
                 SET_DOCTORS_SCHEDULE(state,data){
@@ -121,6 +126,9 @@ var store = new Vuex.Store({
                 },
                 DELETE_COMMON_PATIENT(state,index){
                     state.commonPatient.splice(index ,1);
+                },
+                SET_TREAT_SPEND(state,data){
+                    state.treatSpend = data;
                 }
               
             },

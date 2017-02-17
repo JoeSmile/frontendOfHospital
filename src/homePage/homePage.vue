@@ -197,7 +197,7 @@
                  <chipItem iconName='bindCard_icon' v-bind:doClick="getDepartmentNO" name='科室信息'/>
                  <chipItem iconName='bindCard_icon' v-bind:doClick="getCommonPatient" name='常用病人记录'/>
                  <chipItem iconName='bindCard_icon' v-bind:doClick="getPatientAppointmentInfo" name='查询病人预约信息'/>
-                 <chipItem iconName='bindCard_icon' name='XXXXXX'/>
+                 <chipItem iconName='bindCard_icon' v-bind:doClick="getPrescription" name='处方查询'/>
             </div>
         </section>
         <!--通用-->
@@ -254,7 +254,7 @@
             },
             getHospitalFee(){
                 api.getCommonPatient('owEWzwQKO7G_uy4C0X_Wn2boPVI4').then((data)=>{
-                     this.unitCommit('SET_COMMON_PATIENT',data);
+                    this.unitCommit('SET_COMMON_PATIENT',data);
                     routerManager.routerTo('singel/hospitalizationFee');
                 });
             },
@@ -280,6 +280,12 @@
                 api.getPatientAppointmentInfo('owEWzwQKO7G_uy4C0X_Wn2boPVI4').then((data)=>{
                     this.unitCommit('SET_PATIENTAPPOINTMENTINFO',data);
                     routerManager.routerTo('singel/patientAppointmentInfo');
+                })
+            },
+            getPrescription(){
+                api.getCommonPatient('owEWzwQKO7G_uy4C0X_Wn2boPVI4').then((data)=>{
+                    this.unitCommit('SET_COMMON_PATIENT',data);
+                    routerManager.routerTo('singel/getPrescription');
                 })
             }
         },

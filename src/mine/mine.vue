@@ -105,7 +105,7 @@
        </div>
        <div clas='content'> 
            <ul>
-               <chipItem iconName='bindCard_icon' name='账单'/>
+               <chipItem iconName='bindCard_icon' name='门诊费用清单' @click='getTreatSpend'/>
                <chipItem iconName='bindCard_icon' name='管理就诊卡'/>
                <chipItem iconName='bindCard_icon' name='检验报告'/>
                <chipItem iconName='bindCard_icon' name='缴费记录'/>
@@ -153,11 +153,16 @@
         methods:{
             medicalRecord(){
                 api.getPatientRecord().then((data)=>{
-                    this.$store.commit('MEDICALRECORD',JSON.parse(data));
-                    console.log(data);
+                    this.$store.commit('SET_MEDICALRECORD',JSON.parse(data));
                     // 问诊记录
                     routerManager.routerTo('singel/medicalRecord');
                 })
+            },
+            getTreatSpend(){
+                api.getCommonPatient('owEWzwQKO7G_uy4C0X_Wn2boPVI4').then((data)=>{
+                    this.unitCommit('SET_COMMON_PATIENT',data);
+                    routerManager.routerTo('singel/getTreatSpend');
+                });
             },
             updateUserInfo(info){
                 this.userInfo = info;
