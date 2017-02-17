@@ -104,15 +104,9 @@
            </ul>
        </div>
        <div clas='content'> 
-           <ul>
-               <chipItem iconName='bindCard_icon' name='门诊费用清单' @click='getTreatSpend'/>
-               <chipItem iconName='bindCard_icon' name='管理就诊卡'/>
-               <chipItem iconName='bindCard_icon' name='检验报告'/>
-               <chipItem iconName='bindCard_icon' name='缴费记录'/>
-           </ul>
             <ul>
-                <li class='funcItem'>
-                    <span class='bindCard_icon'></span><span class='name'>问诊订单</span>
+                <li class='funcItem' @click='getTreatSpend'>
+                    <span class='bindCard_icon'></span><span class='name'>门诊费用清单</span>
                 </li>
                 <li class='funcItem' @click='medicalRecord'>
                     <span class='bindCard_icon'></span><span class='name'>问诊纪录</span>
@@ -160,7 +154,7 @@
             },
             getTreatSpend(){
                 api.getCommonPatient('owEWzwQKO7G_uy4C0X_Wn2boPVI4').then((data)=>{
-                    this.unitCommit('SET_COMMON_PATIENT',data);
+                    this.$store.commit('SET_COMMON_PATIENT',JSON.parse(data));
                     routerManager.routerTo('singel/getTreatSpend');
                 });
             },

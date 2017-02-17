@@ -460,7 +460,7 @@ var _backend = {
 
     getTreatSpend(ghxh){
         return $.ajax({
-            url: `${URL}/Hospital/getbrmzfyServlet?ghxh=${ghxh}&提交=提交`,
+            url: `${URL}/Hospital/getbrmzfyServlet?ghxh=${ghxh}&%E6%8F%90%E4%BA%A4=%E6%8F%90%E4%BA%A4`,
             method:'GET',
             contentType:'text/plain'
         }) 
