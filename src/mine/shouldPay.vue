@@ -8,6 +8,7 @@
             flex:2;
         }
         .doPay{
+            background-color: #598ede;
             width: 5rem;
             margin: 0.5rem 2rem 0 0;
         }
