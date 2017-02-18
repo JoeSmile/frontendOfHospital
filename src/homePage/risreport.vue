@@ -29,6 +29,12 @@
             max-height: 20rem;
             overflow: scroll;
         }
+        .empty{
+            border: none;
+            span{
+              text-align: center;
+            }
+        }
        
     }
 </style>
@@ -40,6 +46,7 @@
                 <span class='name'>姓名: {{item.nAME}}</span> 
                 <span class='date'>采样日期: {{item.lODGEDATE.substr(0,10)}}</span> 
             </li>
+            <li v-if='risreport.length == 0' class='empty'><span>暂无数据！</span></li>
         </ul>
         <!--通用-->
         <my-dialog :show='showDialog' :cbClose='closeDialog'>
@@ -51,9 +58,9 @@
                 <li><span>检查部位:{{showItem.pARTOFCHECK}}</span></li>
                 <div class="dic">
                     <p>描述:</p>
-                    <section><p>{{showItem.laybe1}}彩超检查报告彩超检查报告彩超检查报告彩超检查报告彩超检查报告彩超检查报告彩超检查报告彩超检查报告彩超检查报告彩超检查报告</p></section>
+                    <section><p>{{showItem.laybe1}}</p></section>
                     <p>提示:</p>
-                    <section><p>{{showItem.laybe2}}彩超检查报告彩超检查报告彩超检查报告彩超检查报告彩超检查报告彩超检查报告彩超检查报告彩超检查报告彩超检查报告彩超检查报告彩超检查报告</p></section>
+                    <section><p>{{showItem.laybe2}}</p></section>
                 <div>
             </ul>
             <div slot='button' class='button'>

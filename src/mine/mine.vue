@@ -114,16 +114,8 @@
                 <li class='funcItem' @click='shouldPay'>
                     <span class='bindCard_icon'></span><span class='name'>应缴费用</span>
                 </li>
-                <li class='funcItem'>
+                <li class='funcItem' @click='editCommonPatient'>
                     <span class='bindCard_icon'></span><span class='name'>管理就诊人</span>
-                </li>
-           </ul>
-            <ul>
-                <li class='funcItem'>
-                    <span class='bindCard_icon'></span><span class='name'>意见建议列表</span>
-                </li>
-                <li class='funcItem'>
-                    <span class='bindCard_icon'></span><span class='name'>纠纷直通车</span>
                 </li>
            </ul>
         </div>
@@ -171,6 +163,12 @@
                 api.getCommonPatient('owEWzwQKO7G_uy4C0X_Wn2boPVI4').then((data)=>{
                     this.$store.commit('SET_COMMON_PATIENT',JSON.parse(data));
                     routerManager.routerTo('singel/shouldPay');
+                });
+            },
+            editCommonPatient(){
+                api.getCommonPatient('owEWzwQKO7G_uy4C0X_Wn2boPVI4').then((data)=>{
+                    this.$store.commit('SET_COMMON_PATIENT',JSON.parse(data));
+                    routerManager.routerTo('singel/commonPatient');
                 });
             }
         },

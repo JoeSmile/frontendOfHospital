@@ -1,6 +1,10 @@
 <style lang="scss" scoped>
     #medicalRecord{
         font-size: 1.7rem;
+        p.empty{
+            text-align:center;
+            margin-top:1rem;
+        }
         li{
             height: 4rem;
             line-height:4rem;
@@ -47,6 +51,7 @@
                <span class='label'>挂号日期：</span><span class='date'>{{info.ghrq}}</span>
                <span class='label'>姓名：</span><span class='name'>{{info.brxm}}</span>
             </li>
+            <p class='empty'>暂无数据！</p>
         </ul>
         <button @click='goBack'>返  回</button>
     </div>

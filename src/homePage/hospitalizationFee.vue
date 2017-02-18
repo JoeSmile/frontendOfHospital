@@ -3,21 +3,31 @@
         box-sizing: border-box;
         padding: 1rem;
         font-size:1.5rem;
+        .center{
+            text-align: center;
+        }
         li{
             display:flex;
             border-bottom:1px solid #838383;
             min-height: 2.5rem;
             line-height: 2.5rem;
             span{
+                flex:2;
+            }
+            span.flex1{
                 flex:1;
             }
+            span.gg{
+                @extend .center;
+            }
         }
+       
         div.header{
             div{
                 width:100%;
                 display:flex;
                 span{
-                    flex:1;
+                    flex:2;
                 }
             }
         }
@@ -27,19 +37,19 @@
 <template>
     <div id='hospitalizationFee'>
         <ul v-if='step=="ONE"'>
-            <li>常用就诊人信息</li>
+            <li><span class='center'>常用就诊人信息</span></li>
             <li v-for='item in commonPatient' @click='getDetailInfo(item)'>
                 {{item.brxm}}
             </li>
         </ul>
         <ul v-else-if='step=="TWO"'>
-            <li>就诊信息</li>
+            <li><span class='center'>就诊信息</span></li>
             <li v-for='item in patientInfo' @click='getHospitalizationFee(item)' v-if='item.ylklxbm=="02"'>
                 <span>{{item.brxm}}</span><span>{{item.ghxh.substr(0,8)}}</span>
             </li>
         </ul>
         <div v-else-if='step=="THREE"'>
-            <div>住院费清单</div>
+            <div><span class='center'>住院费清单</span></div>
             <div class="header">
                 <div><span>住院号:{{fee.zyh}}</span><span>姓名:{{fee.brxm}}</span></div>
                 <div><span>科室:{{fee.ksmc}}</span></div>
@@ -50,14 +60,14 @@
             <ul>
                 <li>
                     <span class='item'>项目名称</span>
-                    <span class='gg'>规格</span>
+                    <span class='gg flex1'>规格</span>
                     <span class='sl'>数量</span>
                     <span class='dj'>单价</span>
                     <span class='je'>金额</span>
                 </li>
                 <li v-for='item in fee.userfymx'>
                     <span class='item'>{{item.ypmc}}</span>
-                    <span class='gg'>{{item.fygg}}</span>
+                    <span class='gg flex1'>{{item.fygg}}</span>
                     <span class='sl'>{{item.fysl}}</span>
                     <span class='dj'>{{(+item.fydj).toFixed(3)}}</span>
                     <span class='je'>{{(+item.fyje).toFixed(3)}}</span>

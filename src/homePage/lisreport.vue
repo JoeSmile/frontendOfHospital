@@ -26,6 +26,12 @@
         ul.detailList:nth-child(even){
             background-color:beige; 
         }
+        .empty{
+            border: none;
+            span{
+              text-align: center;
+            }
+        }
         
         div.dialog{
             
@@ -69,6 +75,7 @@
                 <span class='name'>姓名: {{item.brxm}}</span> 
                 <span class='date'>采样日期: {{item.cyrq.substr(0,10)}}</span> 
             </li>
+            <li v-if='risreport.length == 0' class='empty'><span>暂无数据！</span></li>
         </ul>
         <!--通用-->
         <my-dialog :show='showDialog' :cbClose='closeDialog'>

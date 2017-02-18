@@ -1,6 +1,11 @@
 <style lang="scss" scoped>
     #commonPatient{
         height: 100%;
+        p.header{
+            margin-top:1rem;
+            font-size:1.7rem; 
+            text-align: center;
+        }
         div.dialog{
             .content{
                 height:30rem;
@@ -39,6 +44,7 @@
 
 <template>
     <div id='commonPatient'>
+       <p class='header'>常用就诊人</p>
        <mt-cell-swipe v-for="(item,index) in commonPatient"  
             :title='item.brxm'
             :right="[
