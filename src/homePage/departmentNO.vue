@@ -2,10 +2,11 @@
     #departmentNO{
         li{
             height: 3rem;
+            line-height: 3rem;
             font-size: 1.7rem;
             text-indent: 3rem;
-            margin-top: 1rem;
             border-bottom: 1px solid #838383;
+            background-color: white;
         }
     }
 </style>

@@ -4,19 +4,26 @@
         .center{
             text-align: center;
         }
+        p{
+            height: 3rem;
+            line-height: 3rem;
+            background: white;
+        }
         .flex2{
             flex:2;
         }
-        .doPay{
+        button.doPay{
             background-color: #598ede;
             width: 5rem;
             margin: 0.5rem 2rem 0 0;
+            height: 3rem;
         }
         ul{
-            padding: 1rem;
             box-sizing: border-box;
         }
         li{
+            text-indent: 1rem;
+            background: white;
             display:flex;
             height:4rem;
             line-height: 4rem;    
@@ -99,7 +106,6 @@
             doPay(){
 
             }
-            
         },
 
         mounted(){

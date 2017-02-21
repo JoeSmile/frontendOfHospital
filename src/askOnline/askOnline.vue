@@ -114,9 +114,6 @@
                 <mt-swipe-item class='two'></mt-swipe-item>
             </mt-swipe>
         </div>
-        <div class='search'>
-            <input placeholder="请输入医生或科室"/>
-        </div>
         <div class='funcGroup'>
             <chipItem iconName='bindCard_icon' name='产科'/>
             <chipItem iconName='bindCard_icon' name='妇科'/>

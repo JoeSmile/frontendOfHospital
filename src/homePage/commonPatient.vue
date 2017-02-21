@@ -2,9 +2,11 @@
     #commonPatient{
         height: 100%;
         p.header{
-            margin-top:1rem;
             font-size:1.7rem; 
             text-align: center;
+            height:3rem;
+            line-height:3rem;
+            background:white;
         }
         div.dialog{
             .content{

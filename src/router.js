@@ -86,6 +86,10 @@ export default [
                     {
                         path:'shouldPay',
                         component:resolve => require(['./mine/shouldPay'],resolve)
+                    },
+                    {
+                        path:'hasAppointedList',
+                        component:resolve => require(['./mine/hasAppointedList'],resolve)
                     }
                 ]
             },

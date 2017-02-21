@@ -467,11 +467,19 @@ var _backend = {
     },
 
     getShouldPay(ghxh){
-            return $.ajax({
+        return $.ajax({
             url: `${URL}/Hospital/mzyjfyservlet?ghxh=${ghxh}&%E6%8F%90%E4%BA%A4=%E6%8F%90%E4%BA%A4%E6%9F%A5%E8%AF%A2%E5%86%85%E5%AE%B9`,
             method:'GET',
             contentType:'text/plain'
         }) 
+    },
+
+    gethasAppointedList(sfzh='',ylkh=''){
+        return $.ajax({
+            url: `${URL}/Hospital/yycxservlet?sfzh=${sfzh}&ylkh=${ylkh}%5C`,
+            method:'GET',
+            contentType:'text/plain'
+        })
     }
  };
 
@@ -595,7 +603,12 @@ var Store = {
         })
     },
     getShouldPay(ghxh){
-         return _backend.getShouldPay(ghxh).then((data)=>{
+        return _backend.getShouldPay(ghxh).then((data)=>{
+            return data;
+        })
+    },
+    gethasAppointedList(sfzh,ylkh){
+        return _backend.getShouldPay(sfzh,ylkh).then((data)=>{
             return data;
         })
     }

@@ -58,6 +58,9 @@
             color: white;
             background-color: $bule;
         }
+        button{
+            height: 3rem;
+        }
     }
 </style>
 

@@ -4,15 +4,22 @@
         .center{
             text-align: center;
         }
+        p{
+            height: 3rem;
+            line-height: 3rem;
+            background: white;
+        }
+       
         .flex2{
             flex:2;
         }
         ul{
-            padding: 1rem;
             box-sizing: border-box;
         }
         li{
+            text-indent: 1rem;
             display:flex;
+            background: white;
             height:4rem;
             line-height: 4rem;    
             border-bottom: 1px solid #838383;        

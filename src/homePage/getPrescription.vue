@@ -1,10 +1,5 @@
 <style lang="scss" scoped>
     #prescription{
-        p.title{
-            font-size: 1.8rem;
-            font-weight: bold;
-            margin-bottom: 2rem;
-        }
         .center{
             text-align: center;
         }
@@ -17,39 +12,48 @@
           
         li{
             display:flex;
+            text-indent: 1rem;
             span{
                 flex:1;
             }
         }
         .page{
-            padding: 1rem 0;
             border-bottom: 1px solid #838383;
             box-sizing: border-box;
         }
         span.double{
-            @extend .right;
             display: flex;
             flex-direction: column;
+            text-indent: 1rem;
             span{
                 flex:1;
             }
         }
         .pageContent{
-            padding: 1rem;
             font-size: 1.5rem;
         }
         ul.stepTwo,ul.stepOne{
-            padding: 1rem;
             li{
+                background:white;
                 height: 4rem;
                 line-height: 4rem;
                 font-size: 1.7rem;
-                border-bottom:1px solid #838383;
+                border-top:1px solid #838383;
             }
         }
-        ul.stepOne{
+        ul.page{
             li{
-                text-indent:12rem;
+            }
+        }
+        div.header{
+            overflow-y: auto;
+            font-size: 1.6rem;
+            span{
+                min-height: 3rem;
+                line-height: 3rem;
+                box-sizing: content-box;
+                margin: 1px;
+                background:white;
             }
         }
     }

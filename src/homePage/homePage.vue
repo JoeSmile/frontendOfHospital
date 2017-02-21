@@ -157,7 +157,7 @@
         <section id='header'>
             <div class="mainFunc">
                 <div class='register'>
-                    <chipItem iconName='register_icon' name='挂号'>
+                    <chipItem iconName='register_icon' name='挂号' v-bind:doClick="getDepartmentNO">
                         <div class='dic' slot='dic'>
                             <span>足不出户快速挂</span>
                             <span>当日号和预约号</span>
@@ -167,7 +167,7 @@
             </div>
             <div class='secondlyFunc'>
                 <div class="pay">
-                    <chipItem iconName='pay_icon' name='缴费'>
+                    <chipItem iconName='pay_icon' name='缴费' v-bind:doClick="shouldPay">
                         <div class='dic' slot='dic'>
                             快速缴纳门诊费用
                         </div>
@@ -240,6 +240,12 @@
                 this.showDialog = false;
             },
            
+            shouldPay(){
+                api.getCommonPatient('owEWzwQKO7G_uy4C0X_Wn2boPVI4').then((data)=>{
+                    this.unitCommit('SET_COMMON_PATIENT',data);
+                    routerManager.routerTo('singel/shouldPay');
+                });
+            },
             getDoctorSchedule(){
                 api.getDoctorSchedule('0004').then((data)=>{
                     this.unitCommit('SET_DOCTORS_SCHEDULE',data);

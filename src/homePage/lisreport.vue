@@ -1,6 +1,9 @@
 <style lang="scss" scoped>
     #lisreport{
         height: 100%;
+        p.title{
+            border-radius: 4px;
+        }
         li{
             height: 4rem;
             font-size: 1.7rem;
@@ -8,6 +11,7 @@
             box-sizing: border-box;
             padding-left:1rem;
             line-height: 4rem;
+            background-color: white;
         }
         ul.showArea{
             max-height: 30rem;
@@ -21,10 +25,14 @@
             }
         }
         ul.detailList:nth-child(odd){
-            background-color:aquamarine 
+            li{
+                background-color:#e3e3e3;
+            }
         }
         ul.detailList:nth-child(even){
-            background-color:beige; 
+            li{
+                background-color:white;
+            }
         }
         .empty{
             border: none;
@@ -34,7 +42,6 @@
         }
         
         div.dialog{
-            
             li{
                 display:flex;
                 box-sizing: border-box;
@@ -71,15 +78,16 @@
 <template>
     <div id='lisreport'>
         <ul class="reportList">
+            <p class='title'>检查记录</p>
             <li v-for='item in lisreport' @click="showDetail(item)">
                 <span class='name'>姓名: {{item.brxm}}</span> 
                 <span class='date'>采样日期: {{item.cyrq.substr(0,10)}}</span> 
             </li>
-            <li v-if='risreport.length == 0' class='empty'><span>暂无数据！</span></li>
+            <li v-if='lisreport.length == 0' class='empty'><span>暂无数据！</span></li>
         </ul>
         <!--通用-->
         <my-dialog :show='showDialog' :cbClose='closeDialog'>
-            <p slot="title" class='title'>检查报告</p>
+            <div slot="title"><p class='title'>检查报告</p></div>
             <ul slot='content' v-if='showItem' class='showArea'>
                 <li class='oneRow'><span class='name'>姓名: {{showItem.brxm}}</span><span class='sex'>性别: {{showItem.brxb=='1'?'男':'女'}}</span><span class='age'>年龄: {{showItem.brnl}}岁</span></li>
                 <li><span class=''>病案号: {{showItem.bah}}</span></li>
@@ -111,7 +119,7 @@
             return {
                 showDialog:false,
                 showItem:{},
-                lisreport:{}
+                lisreport:[]
             }
         },
         components:{

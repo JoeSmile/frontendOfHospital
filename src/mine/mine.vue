@@ -5,8 +5,8 @@
         padding:0;
 
         .header{
-            height: 18rem;
-                margin-bottom: 1rem;
+            /*height: 18rem;*/
+            margin-bottom: 1rem;
             
             .userInfo{
                 height: 10rem;
@@ -96,12 +96,6 @@
               <span class='photo'></span>
               <span class='name'>{{userInfo.username}}</span>
             </div>
-           <ul class='funcGroup'>
-                <chipItem iconName='bindCard_icon' name='挂号'/>
-                <chipItem iconName='bindCard_icon' name='无创'/>
-                <chipItem iconName='bindCard_icon' name='B超'/>
-                <chipItem iconName='bindCard_icon' name='申请'/>
-           </ul>
        </div>
        <div clas='content'> 
             <ul>
@@ -116,6 +110,9 @@
                 </li>
                 <li class='funcItem' @click='editCommonPatient'>
                     <span class='bindCard_icon'></span><span class='name'>管理就诊人</span>
+                </li>
+                <li class='funcItem' @click='gethasAppointedList'>
+                    <span class='bindCard_icon'></span><span class='name'>已挂号信息</span>
                 </li>
            </ul>
         </div>
@@ -169,6 +166,12 @@
                 api.getCommonPatient('owEWzwQKO7G_uy4C0X_Wn2boPVI4').then((data)=>{
                     this.$store.commit('SET_COMMON_PATIENT',JSON.parse(data));
                     routerManager.routerTo('singel/commonPatient');
+                });
+            },
+            gethasAppointedList(){
+                 api.getCommonPatient('owEWzwQKO7G_uy4C0X_Wn2boPVI4').then((data)=>{
+                    this.$store.commit('SET_COMMON_PATIENT',JSON.parse(data));
+                    routerManager.routerTo('singel/hasAppointedList');
                 });
             }
         },

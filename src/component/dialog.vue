@@ -22,9 +22,9 @@
     border-radius: 8px;
     text-align: center;
     .title{
-      height: 3rem;
-      padding-top: 1.5rem;
-      font-size:   1.7rem;
+      height: 5rem;
+      /*padding-top: 1.5rem;*/
+      font-size:   2rem;
       font-weight: 500;
     }
   }

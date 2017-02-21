@@ -36,10 +36,18 @@
     button{
         font-size: 1.7rem;
         margin: 1rem auto;
-        height: 3rem;
+        /*height: 3rem;*/
         width: 24rem;
         display:block;
         border-radius: 4px;
+    }
+    p.title{
+        text-align: center;
+        font-size: 2rem;
+        height: 5rem;
+        line-height: 5rem;
+        background: white;
+        border-bottom: 1px solid #838383;
     }
 </style>
 
